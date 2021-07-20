@@ -1,0 +1,7 @@
+{
+  "name": "fitness4home",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
