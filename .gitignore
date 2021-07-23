@@ -31,4 +31,4 @@ npm-debug.log*
 /www
 
 # Android Build
-./android
+/android
