@@ -7,11 +7,37 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+import { Camera } from '@ionic-native/camera/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    HttpClientModule
+  ],
+  providers: [
+    Camera,
+    GooglePlus,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
