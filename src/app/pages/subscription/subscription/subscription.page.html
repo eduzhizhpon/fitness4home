@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>subscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <ion-radio-group value="tier" [(ngModel)]="subscriptionTier">
+
+            <ion-card button (click)="changeTier('1')">
+              <ion-card-header>
+                <ion-item color="transparent" lines="none" style="float: right; pointer-events: none;">
+                  <ion-radio mode="md" slot="end" value="1">
+                  </ion-radio>
+                </ion-item>
+                <ion-card-subtitle>Semanal<span style="color:coral;"> *</span></ion-card-subtitle>
+                <ion-card-title>USD 1.99</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card button (click)="changeTier('2')">
+              <ion-card-header>
+                <ion-item color="transparent" lines="none" style="float: right; pointer-events: none;">
+                  <ion-radio mode="md" slot="end" value="2">
+                  </ion-radio>
+                </ion-item>
+                <ion-card-subtitle>Mensual<span style="color:coral;"> *</span></ion-card-subtitle>
+                <ion-card-title>USD 6.99</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+            <ion-card button (click)="changeTier('3')">
+              <ion-card-header>
+                <ion-item color="transparent" lines="none" style="float: right; pointer-events: none;">
+                  <ion-radio mode="md" slot="end" value="3">
+                  </ion-radio>
+                </ion-item>
+                <ion-card-subtitle>Anual<span style="color:coral;"> *</span></ion-card-subtitle>
+                <ion-card-title>USD 69.99</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+
+          </ion-radio-group>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block">
+            <ion-icon slot="start" name="star"></ion-icon> Suscribise Ahora
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>
