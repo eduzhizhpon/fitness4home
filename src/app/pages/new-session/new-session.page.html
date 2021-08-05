@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Nuevo Estado
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Nueva Sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Seleccionar dia</ion-label>
+      <ion-select [(ngModel)]="session.day" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione uno">
+        <ion-select-option value="Lunes">Lunes</ion-select-option>
+        <ion-select-option value="Martes">Martes</ion-select-option>
+        <ion-select-option value="Miercoles">Miercoles</ion-select-option>
+        <ion-select-option value="Jueves">Jueves</ion-select-option>
+        <ion-select-option value="Viernes">Viernes</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label>Hora inicio:</ion-label>
+    <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeStart"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Hora fin:</ion-label>
+    <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeEnd"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Sesión</ion-label>
+    <ion-select placeholder="Seleccione uno" [(ngModel)]="session.type">
+      <ion-select-option value="online">Online</ion-select-option>
+      <ion-select-option value="precencial">Precensial</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="saveSession()">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
