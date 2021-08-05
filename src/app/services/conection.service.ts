@@ -38,4 +38,9 @@ export class ConectionService {
     return this.afs.collection("sessions",
           ref => ref.where("active","==",true)).valueChanges();
   }
+
+  deleteSession(session: Session){
+    const refSession = this.afs.collection("sessions");
+    refSession.doc(session.id).delete();
+  }
 }
