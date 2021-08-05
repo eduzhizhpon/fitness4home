@@ -1,0 +1,41 @@
+<ion-item>
+  <ion-label>Nombre de Usuario:</ion-label>
+  <ion-input type="text" [(ngModel)]="userName"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label>Contraseña:</ion-label>
+  <ion-input type="password" [(ngModel)]="password"></ion-input>
+</ion-item>
+
+
+<ion-item>
+  <ion-label>Nombre:</ion-label>
+  <ion-input type="text" [(ngModel)]="displayName"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label>Id del Meeting:</ion-label>
+  <ion-input type="text" [(ngModel)]="meetingNumber"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label>Contraseña del Meeting:</ion-label>
+  <ion-input type="password" [(ngModel)]="meetingPassword"></ion-input>
+</ion-item>
+
+<ion-button expand="block" (click)="login()">
+  <ion-icon slot="start" name="star"></ion-icon> Iniciar Sesión en Zoom
+</ion-button>
+
+<ion-button expand="block" (click)="logout()">
+  <ion-icon slot="start" name="star"></ion-icon> Cerrar Sesión en Zoom
+</ion-button>
+
+<ion-button expand="block" (click)="startMeeting()">
+  <ion-icon slot="start" name="star"></ion-icon> Iniciar reunión en Zoom
+</ion-button>
+
+<ion-button expand="block" (click)="joinMeeting()">
+  <ion-icon slot="start" name="star"></ion-icon> Unirse reunión en Zoom
+</ion-button>
