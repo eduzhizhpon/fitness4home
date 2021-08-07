@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 import { CancelSubscriptionPageRoutingModule } from './cancel-subscription-routing.module';
 
 import { CancelSubscriptionPage } from './cancel-subscription.page';
@@ -13,7 +15,8 @@ import { CancelSubscriptionPage } from './cancel-subscription.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CancelSubscriptionPageRoutingModule
+    CancelSubscriptionPageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [CancelSubscriptionPage]
 })

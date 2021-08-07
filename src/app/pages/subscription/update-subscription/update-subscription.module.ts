@@ -1,3 +1,4 @@
+import { CoreSharedModule } from '@shared/core-shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     IonicModule,
     UpdateSubscriptionPageRoutingModule,
-    SharedModule
+    SharedModule,
+    CoreSharedModule
   ],
   declarations: [UpdateSubscriptionPage]
 })
