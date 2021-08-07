@@ -1,11 +1,53 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-img class="displayed" src="./assets/icon/fitness.png" alt="logo de la aplicación"></ion-img>
+      <ion-card-subtitle class="ion-text-center">Fitness4Home</ion-card-subtitle>
+      <ion-card-title class="ion-text-center">Bienvenido</ion-card-title>
+    </ion-card-header>
   
+    <ion-card-content class="ion-text-center">
+      <ion-item>
+        <ion-label class="ion-text-center" position="floating">Correo electrónico</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="ion-text-center" position="floating">Contraseña</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-button color="success" expand="block">Iniciar Sesión</ion-button> <br>
+      <ion-label>¿Olvidaste la contraseña? <a [routerLink]="['/']">¡Recupérala!</a> </ion-label>
+      
+      <hr>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-label>También puedes iniciar sesión con:</ion-label>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-button>
+            <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            Facebook
+          </ion-button>
+
+          <ion-button color="danger">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Google
+          </ion-button>
+        </ion-row>
+
+        <br>
+        <ion-row class="ion-justify-content-center">
+          <ion-label>¿Nuevo en Fitness4Home? <a [routerLink]="['/auth/register']">¡Regístrate!</a> </ion-label>
+      </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
