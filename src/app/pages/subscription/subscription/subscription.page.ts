@@ -8,15 +8,26 @@ import { Component, OnInit } from '@angular/core';
 export class SubscriptionPage implements OnInit {
 
   subscriptionTier: string;
+  enableFeedback: boolean;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.subscriptionTier = '1';
+  constructor() {
+    this.enableFeedback = false;
   }
 
-  changeTier(tier: string): void {
-    this.subscriptionTier = tier;
+  ngOnInit() {
+  }
+
+  setSubscriptionTier(event: string): void {
+    this.subscriptionTier = event;
+  }
+
+  onSubscribe(): void {
+    this.enableFeedback = true;
+    console.log(this.subscriptionTier);
+  }
+
+  onRouterHome(): void {
+    console.log('Ir al Home');
   }
 
 }
