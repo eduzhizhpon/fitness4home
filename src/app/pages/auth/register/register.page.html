@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-item>
+            <ion-label class="ion-text-center">¿Quién Eres?</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8">
+          <ion-segment color="primary" value="favorite">
+            <ion-segment-button value="user">
+              <ion-label>Usuario</ion-label>
+              <ion-icon name="man"></ion-icon>
+            </ion-segment-button>
+            <ion-segment-button value="coach">
+              <ion-label>Entrenador</ion-label>
+              <ion-icon name="barbell"></ion-icon>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-item>
+            <ion-label class="ion-text-center" position="floating">Nombre de usuario</ion-label>
+            <ion-input type="username"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-center" position="floating">Correo electrónico</ion-label>
+            <ion-input type="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="ion-text-center" position="floating">Contraseña</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="10">
+          <ion-button color="success" expand="block">Registrarse</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <hr>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label class="ion-text-center ion-text-wrap">Puede registrarse también mediante redes sociales</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+          <ion-button>
+            <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            Facebook
+          </ion-button>
+          <ion-button color="danger">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Google
+          </ion-button>
+      </ion-row>
+
+      <hr>
+
+      <ion-row class="ion-justify-content-center">
+          <ion-label>¿Ya estás registrado? <a [routerLink]="['/auth/login']">¡Inicia Sesión!</a> </ion-label>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>
