@@ -8,12 +8,18 @@ import { CompleteProfilePageRoutingModule } from './complete-profile-routing.mod
 
 import { CompleteProfilePage } from './complete-profile.page';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CompleteProfilePageRoutingModule
+    CompleteProfilePageRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCT9wzsIIAkW95uHWVvCbBEP-xtjNbJPow'
+    })
+
   ],
   declarations: [CompleteProfilePage]
 })
