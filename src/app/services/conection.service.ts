@@ -29,6 +29,8 @@ export class ConectionService {
     const refSession = this.afs.collection("sessions");
     if(session.id == null){
       session.id = this.afs.createId();
+      session.uid = "1" // get user id
+      session.state = "Pendiente";
       session.active = true
     }
     refSession.doc(session.id).set(Object.assign({}, session))
