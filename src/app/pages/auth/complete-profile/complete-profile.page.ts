@@ -22,6 +22,8 @@ export class CompleteProfilePage implements OnInit {
     pointer: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Ball-Azure.png'
   };
 
+  flag = true;
+
   constructor(private locationService: LocationService) { }
 
   async ngOnInit() {

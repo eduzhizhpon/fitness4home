@@ -70,26 +70,46 @@
               <ion-input type="number" inputmode="decimal" min="0"></ion-input>
             </ion-item>
           </ion-col>
+
+          <ion-col *ngIf="!flag" size="12">
+            <ion-item>
+              <ion-label class="ion-text-center">Seleccione la dirección de su domicilio</ion-label> <br>
+            </ion-item>
+
+            <div style="position: relative">
+              <agm-map (centerChange)="newAddress($event)"
+                [latitude]="centerLocation.latitude" [longitude]="centerLocation.longitude" [zoom]="zoom">
+      
+                <agm-marker [iconUrl]="icons.pointer"
+                  [latitude]="centerLocation.latitude" 
+                  [longitude]="centerLocation.longitude">
+                </agm-marker>
+      
+              </agm-map>
+            </div>
+          </ion-col>
+
+          <ion-col *ngIf="flag" size="12">
+            <ion-item>
+              <ion-label class="ion-text-center">Ingrese sus datos de Zoom</ion-label> <br>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">ID meeting</ion-label>
+              <ion-input type="string"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Password meeting</ion-label>
+              <ion-input type="string"></ion-input>
+            </ion-item>
+          </ion-col>
         </ion-row>
       </ion-grid>
-      
-      <div style="position: relative">
-        <agm-map (centerChange)="newAddress($event)"
-          [latitude]="centerLocation.latitude" [longitude]="centerLocation.longitude" [zoom]="zoom">
-
-        <agm-marker [iconUrl]="icons.pointer"
-          [latitude]="centerLocation.latitude" 
-          [longitude]="centerLocation.longitude">
-        </agm-marker>
-
-      </agm-map>
-      </div>
 
       <ion-button expand="block">Continuar</ion-button>
 
     </ion-card-content>
   </ion-card>
-
-  
 
 </ion-content>
