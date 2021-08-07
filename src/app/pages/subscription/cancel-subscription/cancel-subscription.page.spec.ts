@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SubscriptionFeedbackComponent } from './subscription-feedback.component';
+import { CancelSubscriptionPage } from './cancel-subscription.page';
 
-describe('SubscriptionFeedbackComponent', () => {
-  let component: SubscriptionFeedbackComponent;
-  let fixture: ComponentFixture<SubscriptionFeedbackComponent>;
+describe('CancelSubscriptionPage', () => {
+  let component: CancelSubscriptionPage;
+  let fixture: ComponentFixture<CancelSubscriptionPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubscriptionFeedbackComponent ],
+      declarations: [ CancelSubscriptionPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SubscriptionFeedbackComponent);
+    fixture = TestBed.createComponent(CancelSubscriptionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

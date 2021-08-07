@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-subscription-options',
@@ -9,7 +9,7 @@ export class SubscriptionOptionsComponent implements OnInit {
 
   @Output() subscriptionTierOut = new EventEmitter<string>();
 
-  subscriptionTier: string;
+  @Input() subscriptionTier: string;
 
   constructor() { }
 

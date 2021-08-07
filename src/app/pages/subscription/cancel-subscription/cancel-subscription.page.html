@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>cancel-subscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <p>Gracias por usar nuestros servicios, lamentamos que te vayas.</p>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Puedes usar tus privilegios hasta: </p>
+            <br/>
+            <ion-img src="./assets/subscription/weightlifting.svg" alt="Imagen motivacional de agradecimiento por los servicios utilizados"
+              class="img-logo">
+            </ion-img>
+            <br/>
+            <div class="thx">
+              Iconos hechos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> desde <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col>
+        <ion-button expand="block" (click)="onRouterHome()">
+            <ion-icon slot="start" name="home"></ion-icon> Ir al Inicio
+          </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

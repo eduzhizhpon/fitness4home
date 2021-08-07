@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SubscriptionPageRoutingModule } from './subscription-routing.module';
+import { UpdateSubscriptionPageRoutingModule } from './update-subscription-routing.module';
 
-import { SubscriptionPage } from './subscription.page';
+import { UpdateSubscriptionPage } from './update-subscription.page';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SubscriptionPageRoutingModule,
+    UpdateSubscriptionPageRoutingModule,
     SharedModule
   ],
-  declarations: [SubscriptionPage]
+  declarations: [UpdateSubscriptionPage]
 })
-export class SubscriptionPageModule {}
+export class UpdateSubscriptionPageModule {}
