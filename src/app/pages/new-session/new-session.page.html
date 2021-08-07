@@ -1,7 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Nuevo Estado
+    <ion-title *ngIf="schedule.id == null">
+      Sesión #{{number}}
+    </ion-title>
+    <ion-title *ngIf="schedule.id != null">
+      Sesión #{{schedule.id}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,10 +16,15 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
+  <ion-list *ngIf="schedule.id == null">
+    <ion-header style="text-align: center;">
+      <ion-label>
+        <h1>Solicitar Entrenamiento</h1>
+      </ion-label>
+    </ion-header>
     <ion-item>
       <ion-label>Seleccionar dia</ion-label>
-      <ion-select [(ngModel)]="session.day" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione uno">
+      <ion-select [(ngModel)]="schedule.day" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione uno">
         <ion-select-option value="Lunes">Lunes</ion-select-option>
         <ion-select-option value="Martes">Martes</ion-select-option>
         <ion-select-option value="Miercoles">Miercoles</ion-select-option>
@@ -24,30 +32,59 @@
         <ion-select-option value="Viernes">Viernes</ion-select-option>
       </ion-select>
     </ion-item>
+  
+
+    <ion-item>
+      <ion-label>Hora inicio:</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeStart"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hora fin:</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeEnd"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sesión</ion-label>
+      <ion-select placeholder="Seleccione uno" [(ngModel)]="schedule.type">
+        <ion-select-option value="Online">Online</ion-select-option>
+        <ion-select-option value="Precencial">Precensial</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="schedule.id != null">
+      <ion-label>Estado: {{session.state}}</ion-label>
+    </ion-item>
   </ion-list>
 
-  <ion-item>
-    <ion-label>Hora inicio:</ion-label>
-    <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeStart"></ion-datetime>
-  </ion-item>
+  <div style="text-align: center;" *ngIf="schedule.id != null &&
+  schedule.type == 'Online'">
+    <h2>Reunión online</h2>
+    <ion-card>
+      <h3>Sesión por zoom</h3>
+      <p>Día: {{schedule.day}}</p>
+      <p>Hora de inicio: {{schedule.hour_start}}</p>
+      <p>Hora de Finalización: {{schedule.hour_end}}</p>
+      <ion-button *ngIf="session.state == 'Aceptado'">Unirse a la reunión</ion-button>
+    </ion-card>
+  </div>
 
-  <ion-item>
-    <ion-label>Hora fin:</ion-label>
-    <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeEnd"></ion-datetime>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Sesión</ion-label>
-    <ion-select placeholder="Seleccione uno" [(ngModel)]="session.type">
-      <ion-select-option value="online">Online</ion-select-option>
-      <ion-select-option value="precencial">Precensial</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <div style="text-align: center;" *ngIf="schedule.id != null &&
+  schedule.type == 'Precencial'">
+    <h3>Sesión Precensial</h3>
+    <ion-card>
+      <ion-label>
+        <h1>Horario</h1>
+        <p>Día: {{schedule.day}}</p>
+        <p>Hora de inicio: {{schedule.hour_start}}</p>
+        <p>Hora de Finalización: {{schedule.hour_end}}</p>
+      </ion-label>
+    </ion-card>
+  </div>
+  
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="schedule.id == null">
     <ion-fab-button (click)="saveSession()">
       <ion-icon name="save-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

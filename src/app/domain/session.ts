@@ -1,10 +1,8 @@
 export class Session {
-    // uid: string
     id: string
-    number: number
-    day: string
-    hour_start: Date
-    hour_end: Date
-    type: string
+    uid: string
+    cid: string
+    schedule: any[]
+    state:string
     active: boolean
 }
