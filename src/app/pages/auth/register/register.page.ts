@@ -16,6 +16,8 @@ export class RegisterPage implements OnInit {
   selectRole: any;
 
   user: User;
+  isAnUser: boolean;
+  private password: string;
 
   constructor(private authService: AuthenticationService,
     private toastController: ToastController,
@@ -28,20 +30,27 @@ export class RegisterPage implements OnInit {
   userTypeChanged(ev: any) {
     console.log('Type changed', ev.detail.value);
     this.user.userType = ev.detail.value;
+    if (this.user.userType === 'user') {
+      this.isAnUser = true;
+    } else {
+      this.isAnUser = false;
+    }
   }
 
   registerUserEmail(){
     console.log(this.user);
     if (this.user.userType != null){
-      this.authService.signupUser(this.user).then( (data) => {
+      this.authService.signupUser(this.user, this.password).then( (data) => {
         const params: NavigationExtras = {
           queryParams: {
-            user: this.user
+            user: this.user,
+            password: this.password,
+            provider: 'email'
           }
         };
-        this.router.navigate(['/auth/complete-profile', params]);
+        this.router.navigate(['/auth/complete-profile'], params);
       }).catch( (reason: any) => {
-        const msg = '[ERROR]: ' + JSON.stringify(reason);
+        const msg = 'Ha ocurrido un error: ' + reason.message;
         const colorCode = 'danger';
         this.showToast(msg, colorCode);
       });

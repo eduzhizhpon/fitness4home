@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../domain/user';
 
+import { ToastController } from '@ionic/angular';
+
 import { LocationService } from '../services/location.service';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
 
 @Component({
   selector: 'app-complete-profile',
@@ -24,25 +27,35 @@ export class CompleteProfilePage implements OnInit {
     pointer: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Ball-Azure.png'
   };
 
-  flag: boolean;
-  user: User;
+  userFlag: boolean;
+  user: User = new User();
   imgData: any;
+  profilePhotoURL: string;
+  provider: string;
+  private password: string;
 
   constructor(private locationService: LocationService,
-    private router: Router, private route: ActivatedRoute) {
+    private authService: AuthenticationService,
+    private router: Router, private route: ActivatedRoute,
+    private toastController: ToastController) {
 
       route.queryParams.subscribe( (params) => {
-        console.log(params);
         this.user = new User();
         if(this.router.getCurrentNavigation().extras.queryParams){
           this.user = this.router.getCurrentNavigation().extras.queryParams.user;
         }
-        this.flag = this.user.userType === 'coach' ? true : false;
-        this.user.profilePhoto = './assets/icon/user.png';
+        this.provider = params.provider;
+        this.password = params.password;
+        this.userFlag = (this.user.userType === 'user') ? true : false;
       });
+      this.setDefaultProfilePhoto();
   }
 
   async ngOnInit() { }
+
+  setDefaultProfilePhoto(){
+    this.profilePhotoURL = './assets/icon/user.png';
+  }
 
   newAddress(event: any) {
     if (event) {
@@ -59,12 +72,34 @@ export class CompleteProfilePage implements OnInit {
   }
 
   uploadFinishedEvt(data: any) {
-    this.user.profilePhoto = data;
-    this.user.profilePhoto = this.imgData.url;
+    this.profilePhotoURL = data.url;
+    this.user.profilePhoto = this.profilePhotoURL;
   }
 
   updateUser() {
-    console.log(this.user);
+    this.authService.updateUserData(this.user, this.provider).then( (data) => {
+      this.authService.emailPasswordLogin(this.user.email, this.password).then( (data1: void) => {
+        this.router.navigate(['subscription']);
+      }).catch( (reason) => {
+        console.log(reason);
+        const msg = 'Ha ocurrido un error al iniciar sesión';
+        const colorCode = 'danger';
+        this.showToast(msg, colorCode, 3500);
+      });
+    }).catch( (reason) => {
+      console.log(reason);
+      const msg = 'Ha ocurrido un error al completar el perfil';
+      const colorCode = 'danger';
+      this.showToast(msg, colorCode, 3500);
+    });
+  }
+
+  showToast(msg: string, colorCode: string, durationMsg: number = 2000) {
+    this.toastController.create({
+      message: msg,
+      duration: durationMsg,
+      color: colorCode
+    }).then(toast => toast.present());
   }
 
 }
