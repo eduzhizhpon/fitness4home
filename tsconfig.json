@@ -6,7 +6,8 @@
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@subscription/*": ["src/app/pages/subscription/*"],
-      "@external-services/*": ["src/app/pages/external-services/*"]
+      "@external-services/*": ["src/app/pages/external-services/*"],
+      "@auth-app/*": ["src/app/pages/auth/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

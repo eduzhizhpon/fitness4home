@@ -78,7 +78,7 @@
 
             <div style="position: relative">
               <agm-map (centerChange)="newAddress($event)"
-                [latitude]="centerLocation.latitude" [longitude]="centerLocation.longitude" [zoom]="zoom">
+                [latitude]="lat" [longitude]="lng" [zoom]="zoom">
       
                 <agm-marker [iconUrl]="icons.pointer"
                   [latitude]="centerLocation.latitude" 

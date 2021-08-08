@@ -8,7 +8,10 @@ import { LocationService } from '../services/location.service';
 })
 export class CompleteProfilePage implements OnInit {
 
-  zoom = 15;
+  zoom = 16;
+  lat = -2.902084;
+  lng = -79.024752;
+  
   currentLocation: any;
   centerLocation: any = {
     latitude: -2.902084,
@@ -22,7 +25,7 @@ export class CompleteProfilePage implements OnInit {
     pointer: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Ball-Azure.png'
   };
 
-  flag = true;
+  flag = false;
 
   constructor(private locationService: LocationService) { }
 

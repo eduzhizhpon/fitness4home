@@ -22,6 +22,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 
 import { Zoom } from '@ionic-native/zoom/ngx';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,7 +35,10 @@ import { Zoom } from '@ionic-native/zoom/ngx';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCT9wzsIIAkW95uHWVvCbBEP-xtjNbJPow'
+    })
   ],
   providers: [
     Camera,

@@ -28,7 +28,14 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
 
-      
+      {
+        path: 'auth/my-profile',
+        loadChildren: () => import('@auth-app/my-profile/my-profile.module').then(m => m.MyProfilePageModule)
+      },
+      {
+        path: 'settings/edit-profile',
+        loadChildren: () => import('@auth-app/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
+      },
       {
         path: 'subscription/cancel',
         loadChildren: () => import('@subscription/cancel-subscription/cancel-subscription.module').then(m => m.CancelSubscriptionPageModule)
