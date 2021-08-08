@@ -46,7 +46,7 @@ export class UploadImageComponent implements OnInit {
 
   async startUpload(file: string){
     const byteCharacters = atob(file);
-    const path = `images/profile-photos/${new Date().getTime()}.jpg`;
+    const path = `profile-photos/${new Date().getTime()}.jpg`;
     const image = 'data:image/jpg;base64,'+file;
 
     const data = {

@@ -41,14 +41,14 @@ export class AuthenticationService {
     return this.user.pipe(first()).toPromise();
   }
 
-  async signupUser(newUser: User): Promise<any> {
+  async signupUser(newUser: User, password: string): Promise<any> {
     try {
-      await this.afAuth.createUserWithEmailAndPassword(newUser.email, newUser.password);
-      const user = await this.afAuth.currentUser;
+      return this.afAuth.createUserWithEmailAndPassword(newUser.email, password);
+      // const user = await this.afAuth.currentUser;
 
-      return await user.updateProfile({
-        photoURL: 'https://goo.gl/7kz9qG'
-      });
+      // return await user.updateProfile({
+      //   photoURL: 'https://goo.gl/7kz9qG'
+      // });
 
     } catch (error) {
       console.error('Error' + JSON.stringify(error));
@@ -128,9 +128,9 @@ export class AuthenticationService {
 
   // Guardar los datos del usuario en Firestore
   async updateUserData(usertemp: any, provider: any){
-    console.log('update' + JSON.stringify(usertemp));
+    // console.log('update' + JSON.stringify(usertemp));
     const doc: any = await this.userExists(usertemp.email);
-    console.log('doc' + JSON.stringify(doc));
+    // console.log('doc' + JSON.stringify(doc));
 
     let data: any;
     const user: any = JSON.parse(JSON.stringify(usertemp));
@@ -141,12 +141,23 @@ export class AuthenticationService {
       // Crear Cuenta
       data = {
         uid: user.uid,
+        userType: user.userType || '',
         email: user.email || null,
-        displayName: user.displayName || '',
-        photoURL: user.photoURL || 'https://goo.gl/7kz9qG',
+        profilePhoto: user.photoURL || './assets/icon/user.png',
+        name: user.displayName || user.name || '',
+        lastname: user.lastname || '',
+        birthday: user.birthday || '',
+        phoneNumber: user.phoneNumber || '',
+        weight: user.weight || '',
+        height: user.height || '',
+        homeLatitude: user.homeLatitude || '',
+        homeLongitude: user.homeLongitude || '',
+        zoomIdMeeting: user.zoomIdMeeting || '',
+        zoomPasswordMeeting: user.zoomPasswordMeeting || '',
+        enabled: true,
         provider,
-        lastLogin: new Date(Number(user.lastLoginAt)) || new Date(),
-        createdAt: new Date(Number(user.createdAt)) || new Date()
+        lastLogin: new Date(),
+        createdAt: new Date()
       };
     } else if (doc.active == false){
       // eslint-disable-next-line no-throw-literal
@@ -158,17 +169,35 @@ export class AuthenticationService {
       // Actualizar cuenta
       data = {
         uid: user.uid,
+        userType: user.userType || '',
         email: user.email || null,
-        displayName: user.displayName || '',
-        photoURL: user.photoURL || 'https://goo.gl/7kz9qG',
+        profilePhoto: user.photoURL || './assets/icon/user.png',
+        name: user.displayName || user.name || '',
+        lastname: user.lastname || '',
+        birthday: user.birthday || '',
+        phoneNumber: user.phoneNumber || '',
+        weight: user.weight || '',
+        height: user.height || '',
+        homeLatitude: user.homeLatitude || '',
+        homeLongitude: user.homeLongitude || '',
+        zoomIdMeeting: user.zoomIdMeeting || '',
+        zoomPasswordMeeting: user.zoomPasswordMeeting || '',
+        enabled: user.enabled,
         provider,
-        lastLogin: new Date(Number(user.lastLoginAt)) || new Date()
+        lastLogin: new Date(),
       };
     }
 
-    console.log('data', JSON.stringify(data));
+    console.log('data previo: ', JSON.stringify(data));
+
     const userRef = this.afs.collection<any>('users');
 
-    return userRef.doc(`${user.uid}`).set(data, { merge: true});
+    if (data.uid == null || data.uid == undefined){
+      data.uid = this.afs.createId();
+    }
+
+    console.log('data despues: ', JSON.stringify(data));
+
+    return userRef.doc(`${data.uid}`).set(data, { merge: true});
   }
 }

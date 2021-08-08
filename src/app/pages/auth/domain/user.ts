@@ -2,7 +2,6 @@ export class User {
     uid: string;
     userType: string;
     email: string;
-    password: string;
     profilePhoto: any;
     name: string;
     lastname: string;
@@ -14,4 +13,5 @@ export class User {
     homeLongitude: number;
     zoomIdMeeting: string;
     zoomPasswordMeeting: string;
+    enabled: boolean;
 }

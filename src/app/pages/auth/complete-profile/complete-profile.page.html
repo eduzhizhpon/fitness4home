@@ -23,7 +23,7 @@
           <ion-col>
             <ion-card>
               <ion-card-header class="ion-text-center">
-                  <img class="avatar" [src]="user.profilePhoto" />
+                  <img class="avatar" [src]="profilePhotoURL" />
               </ion-card-header>
 
               <ion-card-content>
@@ -81,7 +81,7 @@
         </ion-row>
 
         <ion-row>
-          <ion-col *ngIf="!flag" size="12">
+          <ion-col *ngIf="userFlag" size="12">
             <ion-item>
               <ion-label class="ion-text-center">Seleccione la dirección de su domicilio</ion-label> <br>
             </ion-item>
@@ -99,7 +99,7 @@
             </div>
           </ion-col>
 
-          <ion-col *ngIf="flag" size="12">
+          <ion-col *ngIf="!userFlag" size="12">
             <ion-item>
               <ion-label class="ion-text-center">Ingrese sus datos de Zoom</ion-label> <br>
             </ion-item>
