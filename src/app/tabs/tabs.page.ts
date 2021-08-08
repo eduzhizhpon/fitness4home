@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  isUser: boolean;
+
+  constructor() {
+    this.isUser = true;
+  }
 
 }

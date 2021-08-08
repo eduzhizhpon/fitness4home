@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Nuevo Estado
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Nuevo Estado</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Actividad:</ion-label>
+      <ion-input [(ngModel)]="state.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descripción:</ion-label>
+      <ion-input [(ngModel)]="state.description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <div style="text-align: center; width: 50%;">
+        <app-take-photo source="photo" (imageSelected)="imageSelectedEvt($event)" 
+        (uploadFinished)="uploadFinishedEvt($event)"></app-take-photo>
+      </div>
+      <div style="text-align: center; width: 50%;">
+        <app-take-photo source="none" (imageSelected)="imageSelectedEvt($event)" 
+        (uploadFinished)="uploadFinishedEvt($event)"></app-take-photo>
+      </div>
+    </ion-item>
+    
+    <ion-item>
+      <ion-card *ngIf="state.image?.url != null">
+        <ion-img [src]="state.image?.url"
+        style="width: 50%; margin: auto;"></ion-img>
+      </ion-card>
+      <ion-card *ngIf="state.image?.url == null">
+        <ion-img src="https://byspel.com/wp-content/uploads/2017/01/upload-cloud.png" 
+        style="width: 50%; margin: auto;"></ion-img>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+    
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="saveState()">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

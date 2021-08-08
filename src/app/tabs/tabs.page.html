@@ -7,7 +7,12 @@
       <ion-label>Subscripción</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="session">
+    <ion-tab-button tab="session-user" *ngIf="isUser">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Sesiones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="session-coach" *ngIf="!isUser">
       <ion-icon name="calendar"></ion-icon>
       <ion-label>Sesiones</ion-label>
     </ion-tab-button>
