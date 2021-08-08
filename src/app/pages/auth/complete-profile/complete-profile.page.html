@@ -1,0 +1,115 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>complete-profile</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Completa tu perfil</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-avatar>
+                <ion-img src="./assets/icon/fitness.png"></ion-img>
+                <!-- <img src="./assets/icon/fitness.png"> -->
+              </ion-avatar>
+
+              <ion-label>Sube tu foto</ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Nombre</ion-label>
+              <ion-input type="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Apellido</ion-label>
+              <ion-input type="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="10">
+            <ion-item>
+              <ion-label class="ion-text-center" position="stacked">Fecha de Nacimiento</ion-label>
+              <ion-input type="date"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="10">
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Número de teléfono</ion-label>
+              <ion-input type="tel" inputmode="tel"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Peso (kg)</ion-label>
+              <ion-input type="number" inputmode="decimal" min="0"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Altura (cm)</ion-label>
+              <ion-input type="number" inputmode="decimal" min="0"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col *ngIf="!flag" size="12">
+            <ion-item>
+              <ion-label class="ion-text-center">Seleccione la dirección de su domicilio</ion-label> <br>
+            </ion-item>
+
+            <div style="position: relative">
+              <agm-map (centerChange)="newAddress($event)"
+                [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+      
+                <agm-marker [iconUrl]="icons.pointer"
+                  [latitude]="centerLocation.latitude" 
+                  [longitude]="centerLocation.longitude">
+                </agm-marker>
+      
+              </agm-map>
+            </div>
+          </ion-col>
+
+          <ion-col *ngIf="flag" size="12">
+            <ion-item>
+              <ion-label class="ion-text-center">Ingrese sus datos de Zoom</ion-label> <br>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">ID meeting</ion-label>
+              <ion-input type="string"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Password meeting</ion-label>
+              <ion-input type="string"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-button expand="block">Continuar</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

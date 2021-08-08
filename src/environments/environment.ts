@@ -11,7 +11,9 @@ export const environment = {
     storageBucket: "fitness4home-fb.appspot.com",
     messagingSenderId: "302141082406",
     appId: "1:302141082406:web:c7b7b0e0b037b660e34fe7"
-  }
+  },
+  ZOOM_SDK_KEY:'J80LnOyCvy3mqJLRJdsqGxIm9HKoDfIDRG2w',
+  ZOOM_SDK_SECRET: 'PPPnpuxXGKssdgPb2ovRvGzciXZIPUlmSMQB'
 };
 
 /*
