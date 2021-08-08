@@ -67,6 +67,7 @@ export class UpdateSubscriptionPage implements OnInit {
 
   onRouterHome(): void {
     console.log('Ir al Home');
+    this.router.navigate(['/home']);
   }
 
 }

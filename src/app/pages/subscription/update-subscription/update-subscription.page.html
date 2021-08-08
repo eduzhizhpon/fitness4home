@@ -38,6 +38,11 @@
         </ion-card>
       </ion-col>
     </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
     <ion-row *ngIf="!enableFeedback">
       <ion-col>
           <ion-button expand="block" (click)="onUpdateSubscribe()" [disabled]="this.subscriptionTier !== currentSubscriptionTier ? false : true">
@@ -61,4 +66,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-content>
+</ion-footer>
