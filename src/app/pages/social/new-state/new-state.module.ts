@@ -9,12 +9,15 @@ import { NewStatePageRoutingModule } from './new-state-routing.module';
 import { NewStatePage } from './new-state.page';
 import { TakePhotoComponent } from '@social/components/take-photo/take-photo.component';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewStatePageRoutingModule
+    NewStatePageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [NewStatePage, TakePhotoComponent]
 })

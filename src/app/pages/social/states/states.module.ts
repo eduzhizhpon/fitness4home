@@ -8,12 +8,15 @@ import { StatesPageRoutingModule } from './states-routing.module';
 
 import { StatesPage } from './states.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StatesPageRoutingModule
+    StatesPageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [StatesPage]
 })
