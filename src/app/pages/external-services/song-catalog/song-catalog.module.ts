@@ -8,12 +8,15 @@ import { SongCatalogPageRoutingModule } from './song-catalog-routing.module';
 
 import { SongCatalogPage } from './song-catalog.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SongCatalogPageRoutingModule
+    SongCatalogPageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [SongCatalogPage]
 })

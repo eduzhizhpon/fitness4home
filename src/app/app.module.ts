@@ -19,6 +19,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 import { Camera } from '@ionic-native/camera/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { Zoom } from '@ionic-native/zoom/ngx';
 
@@ -42,6 +43,7 @@ import { AgmCoreModule } from '@agm/core';
   ],
   providers: [
     Camera,
+    CallNumber,
     GooglePlus,
     Zoom,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -10,15 +10,23 @@ import { SongCatalogRestService } from '../services/song-catalog-rest.service';
 export class SongCatalogPage implements OnInit {
 
   songList: Song[];
+  word: string;
+  loading: boolean;
 
-  constructor(private songCatalogRestService: SongCatalogRestService) { }
+  constructor(private songCatalogRestService: SongCatalogRestService) {
+    this.loading = false;
+   }
 
   ngOnInit() {
-    this.songCatalogRestService.getDefaultSongList().subscribe( (response) => {
+    this.loadDefault();
+  }
+
+  async loadDefault() {
+    this.loading = true;
+    this.songCatalogRestService.getDefaultSongList().subscribe((response) => {
       let songListResponse = response.response.hits;
       this.songList = this.filterSongs(songListResponse);
-      
-      console.log('Canciones', this.songList);
+      this.loading = false;
     });
   }
 
@@ -29,6 +37,26 @@ export class SongCatalogPage implements OnInit {
       songList.push(song);
     }
     return songList;
+  }
+
+  async doRefresh(event) {
+    this.songList = [];
+    await this.loadDefault();
+
+    event.target.complete();
+  }
+
+  onSearch(){
+    if (this.word) {
+      this.loading = true;
+      this.songCatalogRestService.getSongListByFilter(this.word).subscribe( (response) => {
+        let songListResponse = response.response.hits;
+        this.songList = this.filterSongs(songListResponse);
+        this.loading = false;
+      });
+    } else {
+      this.loadDefault();
+    }
   }
 
 }

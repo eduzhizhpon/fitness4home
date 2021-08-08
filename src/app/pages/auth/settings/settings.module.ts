@@ -4,20 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
+import { SettingsPageRoutingModule } from './settings-routing.module';
 
-import { RegisterPage } from './register.page';
-
+import { SettingsPage } from './settings.page';
 import { CoreSharedModule } from '@shared/core-shared.module';
 
 @NgModule({
   imports: [
-    CoreSharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule
+    SettingsPageRoutingModule,
+    CoreSharedModule
   ],
-  declarations: [RegisterPage]
+  declarations: [SettingsPage]
 })
-export class RegisterPageModule {}
+export class SettingsPageModule {}

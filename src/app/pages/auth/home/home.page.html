@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="home-center-content">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-items-center ion-text-center">
+          <h1>¡Bienvenido, !</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-img src="./assets/imgs/home_img_1.jpg" alt="Imagen de bienvenida a la aplicación Fitness 4 All" class="home-img"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-grid *ngIf="!isAdmin">
+    <ion-row class="ion-align-items-center ion-text-center">
+      <ion-col class="ion-margin-top">
+        <ion-button expand="block" *ngIf="isUser" (click)="onUserTrainSession()">
+          <ion-icon slot="start" name="trophy"></ion-icon>
+          Definir sesiones de entrenamiento
+        </ion-button>
+
+        <ion-button expand="block" *ngIf="!isUser" (click)="onCoachTrainSession()">
+          <ion-icon slot="start" name="trophy"></ion-icon>
+          Explorar sesiones de entrenamiento
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center ion-text-center">
+      <ion-col class="ion-margin-top">
+        <ion-button expand="block" color="primary" (click)="onPublicStatus()">
+          <ion-icon slot="start" name="duplicate"></ion-icon>
+          Publicar Estado
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-margin-top">
+        <ion-button expand="block" color="primary" (click)="onMyProfile()">
+          <ion-icon slot="start" name="person"></ion-icon>
+          Mi Perfil
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="isAdmin">
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" *ngIf="isAdmin" routerLink="/admin/coach">
+            <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+            Aprobar Entrenadores
+          </ion-button>
+        </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-footer>

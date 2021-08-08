@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cancel-subscription',
@@ -7,13 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CancelSubscriptionPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   onRouterHome() {
-
+    console.log('Regreso al inicio');
+    this.router.navigate(['/home']);
   }
 
 }

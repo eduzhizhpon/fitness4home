@@ -4,20 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
+import { AdminCoachPageRoutingModule } from './admin-coach-routing.module';
 
-import { RegisterPage } from './register.page';
-
+import { AdminCoachPage } from './admin-coach.page';
 import { CoreSharedModule } from '@shared/core-shared.module';
 
 @NgModule({
   imports: [
-    CoreSharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule
+    AdminCoachPageRoutingModule,
+    CoreSharedModule
   ],
-  declarations: [RegisterPage]
+  declarations: [AdminCoachPage]
 })
-export class RegisterPageModule {}
+export class AdminCoachPageModule {}

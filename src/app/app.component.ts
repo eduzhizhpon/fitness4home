@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   constructor(private zoomService: Zoom) {
-    this.zoomService.initialize(environment.ZOOM_SDK_KEY, environment.ZOOM_SDK_SECRET)
+    this.zoomService.initialize(environment.zoomSDKKey, environment.zoomSDKSecret)
       .then((success: any) => console.log(success))
       .catch((error: any) => console.log(error));
   }
