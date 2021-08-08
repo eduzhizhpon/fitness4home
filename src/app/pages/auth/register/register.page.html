@@ -17,7 +17,7 @@
 
       <ion-row class="ion-justify-content-center">
         <ion-col size="8">
-          <ion-segment color="primary" value="favorite">
+          <ion-segment color="primary" (ionChange)="userTypeChanged($event)">
             <ion-segment-button value="user">
               <ion-label>Usuario</ion-label>
               <ion-icon name="man"></ion-icon>
@@ -34,18 +34,18 @@
         <ion-col size="10">
           <ion-item>
             <ion-label class="ion-text-center" position="floating">Correo electrónico</ion-label>
-            <ion-input type="email"></ion-input>
+            <ion-input [(ngModel)]="user.email" name="email" type="email"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label class="ion-text-center" position="floating">Contraseña</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-input [(ngModel)]="user.password" name="password" type="password"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
 
       <ion-row class="ion-justify-content-center">
         <ion-col size="10">
-          <ion-button color="success" expand="block">Registrarse</ion-button>
+          <ion-button (click)="registerUserEmail()" color="success" expand="block">Registrarse</ion-button>
         </ion-col>
       </ion-row>
 
