@@ -1,16 +1,8 @@
 <ion-header [translucent]="true">
   <app-name-icon></app-name-icon>
-  <!-- <ion-toolbar>
-    <ion-title> </ion-title>
-  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
   <div class="home-center-content">
     <ion-grid>
       <ion-row>
@@ -28,15 +20,15 @@
 </ion-content>
 
 <ion-footer>
-  <ion-grid>
+  <ion-grid *ngIf="!isAdmin">
     <ion-row class="ion-align-items-center ion-text-center">
       <ion-col class="ion-margin-top">
-        <ion-button expand="block" *ngIf="flag" (click)="onUserTrainSession()">
+        <ion-button expand="block" *ngIf="isUser" (click)="onUserTrainSession()">
           <ion-icon slot="start" name="trophy"></ion-icon>
           Definir sesiones de entrenamiento
         </ion-button>
 
-        <ion-button expand="block" *ngIf="!flag" (click)="onCoachTrainSession()">
+        <ion-button expand="block" *ngIf="!isUser" (click)="onCoachTrainSession()">
           <ion-icon slot="start" name="trophy"></ion-icon>
           Explorar sesiones de entrenamiento
         </ion-button>
@@ -56,5 +48,16 @@
         </ion-button>
       </ion-col>
     </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="isAdmin">
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" *ngIf="isAdmin" routerLink="/admin/coach">
+            <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+            Aprobar Entrenadores
+          </ion-button>
+        </ion-col>
+      </ion-row>
   </ion-grid>
 </ion-footer>
