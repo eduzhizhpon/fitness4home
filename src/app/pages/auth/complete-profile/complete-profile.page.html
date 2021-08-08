@@ -1,11 +1,5 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>complete-profile</ion-title>
-  </ion-toolbar>
-</ion-header> -->
 
 <ion-content>
-
   <ion-card>
     <ion-card-header>
       <ion-card-title class="ion-text-center">Completa tu perfil</ion-card-title>
@@ -15,25 +9,27 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-item>
-              <ion-avatar>
-                <ion-img src="./assets/icon/fitness.png"></ion-img>
-                <!-- <img src="./assets/icon/fitness.png"> -->
-              </ion-avatar>
+            <ion-card>
+              <ion-card-header class="ion-text-center">
+                  <img class="avatar" [src]="'user.profilePhoto'" />
+              </ion-card-header>
 
-              <ion-label>Sube tu foto</ion-label>
-            </ion-item>
+              <ion-card-content>
+                <app-upload-image source="none" (imageSelected)="imageSelectedEvt($event)" 
+                  (uploadFinished)="uploadFinishedEvt($event)"></app-upload-image>
+              </ion-card-content>
+            </ion-card>
           </ion-col>
 
           <ion-col>
             <ion-item>
-              <ion-label class="ion-text-center" position="floating">Nombre</ion-label>
-              <ion-input type="email"></ion-input>
-            </ion-item>
-
+              <ion-label class="ion-text-center" position="floating">Peso (kg)</ion-label>
+              <ion-input type="number" inputmode="decimal" min="0"></ion-input>
+            </ion-item> <br><br>
+            
             <ion-item>
-              <ion-label class="ion-text-center" position="floating">Apellido</ion-label>
-              <ion-input type="email"></ion-input>
+              <ion-label class="ion-text-center" position="floating">Altura (cm)</ion-label>
+              <ion-input type="number" inputmode="decimal" min="0"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -56,21 +52,23 @@
           </ion-col>
         </ion-row>
 
+        <ion-row class="ion-justify-content-center">
+          <ion-col>
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Nombre</ion-label>
+              <ion-input type="string" inputmode="string"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label class="ion-text-center" position="floating">Apellido</ion-label>
+              <ion-input type="string" inputmode="string"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
         <ion-row>
-          <ion-col size="6">
-            <ion-item>
-              <ion-label class="ion-text-center" position="floating">Peso (kg)</ion-label>
-              <ion-input type="number" inputmode="decimal" min="0"></ion-input>
-            </ion-item>
-          </ion-col>
-
-          <ion-col size="6">
-            <ion-item>
-              <ion-label class="ion-text-center" position="floating">Altura (cm)</ion-label>
-              <ion-input type="number" inputmode="decimal" min="0"></ion-input>
-            </ion-item>
-          </ion-col>
-
           <ion-col *ngIf="!flag" size="12">
             <ion-item>
               <ion-label class="ion-text-center">Seleccione la dirección de su domicilio</ion-label> <br>
@@ -78,7 +76,7 @@
 
             <div style="position: relative">
               <agm-map (centerChange)="newAddress($event)"
-                [latitude]="centerLocation.latitude" [longitude]="centerLocation.longitude" [zoom]="zoom">
+                [latitude]="lat" [longitude]="lng" [zoom]="zoom">
       
                 <agm-marker [iconUrl]="icons.pointer"
                   [latitude]="centerLocation.latitude" 
@@ -108,7 +106,6 @@
       </ion-grid>
 
       <ion-button expand="block">Continuar</ion-button>
-
     </ion-card-content>
   </ion-card>
 

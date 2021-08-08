@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 import { ToastController } from '@ionic/angular';
 
@@ -17,7 +18,8 @@ export class RegisterPage implements OnInit {
   user: User;
 
   constructor(private authService: AuthenticationService,
-    private toastController: ToastController) { }
+    private toastController: ToastController,
+    private router: Router) { }
 
   ngOnInit() {
     this.user = new User();
@@ -32,7 +34,12 @@ export class RegisterPage implements OnInit {
     console.log(this.user);
     if (this.user.userType != null){
       this.authService.signupUser(this.user).then( (data) => {
-        console.log(data);
+        const params: NavigationExtras = {
+          queryParams: {
+            user: this.user
+          }
+        };
+        this.router.navigate(['/auth/complete-profile', params]);
       }).catch( (reason: any) => {
         const msg = '[ERROR]: ' + JSON.stringify(reason);
         const colorCode = 'danger';

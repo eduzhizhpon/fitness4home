@@ -47,7 +47,6 @@ export class AuthenticationService {
       const user = await this.afAuth.currentUser;
 
       return await user.updateProfile({
-        // displayName: name,
         photoURL: 'https://goo.gl/7kz9qG'
       });
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../domain/user';
+
 import { LocationService } from '../services/location.service';
 
 @Component({
@@ -9,6 +12,8 @@ import { LocationService } from '../services/location.service';
 export class CompleteProfilePage implements OnInit {
 
   zoom = 15;
+  lat = -2.902084;
+  lng = -79.024752;
   currentLocation: any;
   centerLocation: any = {
     latitude: -2.902084,
@@ -16,20 +21,28 @@ export class CompleteProfilePage implements OnInit {
   };
 
   icons = {
-    client: 'https://cdn1.iconfinder.com/data/icons/ecommerce-61/48/eccomerce_-_location-48.png',
-    shop: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Marker-Outside-Chartreuse.png',
-    center: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Marker-Inside-Chartreuse.png',
     pointer: 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Ball-Azure.png'
   };
 
-  flag = true;
+  flag: boolean;
+  user: User;
+  imgData: any;
 
-  constructor(private locationService: LocationService) { }
+  constructor(private locationService: LocationService,
+    private router: Router, private route: ActivatedRoute) {
 
-  async ngOnInit() {
-    // this.currentLocation = await this.locationService.getCurrentLocation();
-    // console.log(this.currentLocation);
+      route.queryParams.subscribe( (params) => {
+        console.log(params);
+        this.user = new User();
+        if(this.router.getCurrentNavigation().extras.queryParams){
+          this.user = this.router.getCurrentNavigation().extras.queryParams.user;
+        }
+        this.flag = this.user.userType === 'coach' ? true : false;
+        this.user.profilePhoto = './assets/icon/';
+      });
   }
+
+  async ngOnInit() { }
 
   newAddress(event: any) {
     if (event) {
@@ -38,6 +51,18 @@ export class CompleteProfilePage implements OnInit {
       this.locationService.getAddressOfLocation(this.centerLocation);
       // console.log(this.centerLocation);
     }
+  }
+
+  imageSelectedEvt(data: any) {
+    this.imgData = data;
+  }
+
+  uploadFinishedEvt(data: any) {
+    this.user.profilePhoto = data;
+  }
+
+  updateUser() {
+    console.log('entra');
   }
 
 }
