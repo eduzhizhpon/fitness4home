@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
@@ -29,7 +29,17 @@ const routes: Routes = [
       },
       {
         path: 'settings',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('@auth-app/settings/settings.module').then(m => m.SettingsPageModule)
+          },
+          {
+            path: 'edit-profile',
+            loadChildren: () => import('@auth-app/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
+          },
+        ]
+
       },
 
 
@@ -48,12 +58,6 @@ const routes: Routes = [
       {
         path: 'home/session-pending',
         loadChildren: () => import('@social/sessions-coach/sessions-coach.module').then(m => m.SessionsCoachPageModule)
-      },
-
-
-      {
-        path: 'settings/edit-profile',
-        loadChildren: () => import('@auth-app/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
       },
 
 
@@ -81,19 +85,20 @@ const routes: Routes = [
       
       {
         path: '',
-        redirectTo: '/subscription',
+        redirectTo: '/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/subscription',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class TabsPageRoutingModule {}
