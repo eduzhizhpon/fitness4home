@@ -19,7 +19,7 @@ export class StatesPage implements OnInit {
   }
 
   newState(){
-    this.router.navigate(['/new-state'])
+    this.router.navigate(['/home/states/new-state'])
   }
 
 }
