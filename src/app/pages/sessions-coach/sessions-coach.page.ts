@@ -39,6 +39,7 @@ export class SessionsCoachPage implements OnInit {
   }
 
   aceptSession(session: Session){
+    session.cid = "coach1"//get user id -coach
     session.state = "Aceptado"
     console.log(session);
     this.conectionServices.saveSession(session);

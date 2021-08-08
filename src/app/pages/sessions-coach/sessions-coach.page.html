@@ -15,14 +15,12 @@
 
   <ion-list *ngFor="let session of sessions | async">
     <ion-item *ngIf="session.state == 'Pendiente'">
-        <!-- <ion-card> -->
-          <ion-label>
-            <h3>User</h3>
-            <div *ngFor="let schedule of schedules">
-              <p *ngIf="schedule.sid == session.id">{{schedule.day}}, {{schedule.hour_start}} - {{schedule.hour_end}} {{schedule.type}}</p>
-            </div>
-          </ion-label>
-      <!-- </ion-card> -->
+      <ion-label>
+        <h3>User</h3>
+        <div *ngFor="let schedule of schedules">
+          <p *ngIf="schedule.sid == session.id">{{schedule.day}}, {{schedule.hour_start}} - {{schedule.hour_end}} {{schedule.type}}</p>
+        </div>
+      </ion-label>
       <ion-button (click)="aceptSession(session)" slot="end">Aceptar</ion-button>
     </ion-item>
   </ion-list>
