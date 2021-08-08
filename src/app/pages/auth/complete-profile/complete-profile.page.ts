@@ -48,8 +48,9 @@ export class CompleteProfilePage implements OnInit {
     if (event) {
       this.centerLocation.latitude = event.lat;
       this.centerLocation.longitude = event.lng;
+      this.user.homeLatitude = event.lat;
+      this.user.homeLongitude = event.lng;
       this.locationService.getAddressOfLocation(this.centerLocation);
-      // console.log(this.centerLocation);
     }
   }
 
@@ -59,10 +60,11 @@ export class CompleteProfilePage implements OnInit {
 
   uploadFinishedEvt(data: any) {
     this.user.profilePhoto = data;
+    this.user.profilePhoto = this.imgData.url;
   }
 
   updateUser() {
-    console.log('entra');
+    console.log(this.user);
   }
 
 }
