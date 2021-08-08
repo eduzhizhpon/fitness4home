@@ -118,7 +118,7 @@ export class AuthenticationService {
 
   // ---------
   userExists(email: string) {
-    console.log('userExists' + email);
+    console.log('userExists - Email: ' + email);
     return this.afs
     .collection('users', ref => ref.where('email', '==', email))
     .valueChanges()
@@ -128,14 +128,14 @@ export class AuthenticationService {
 
   // Guardar los datos del usuario en Firestore
   async updateUserData(usertemp: any, provider: any){
-    // console.log('update' + JSON.stringify(usertemp));
+    console.log('update - Datos: ' + JSON.stringify(usertemp));
     const doc: any = await this.userExists(usertemp.email);
-    // console.log('doc' + JSON.stringify(doc));
+    console.log('doc - Datos Doc: ' + JSON.stringify(doc));
 
     let data: any;
     const user: any = JSON.parse(JSON.stringify(usertemp));
 
-    console.log('doc' + JSON.stringify(doc));
+    console.log('doc Doc Despues : ' + JSON.stringify(doc));
 
     if (doc == null || doc == '') {
       // Crear Cuenta

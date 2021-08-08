@@ -1,14 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <app-name-icon></app-name-icon>
-    <ion-title class="ion-text-center"> Completa tu perfil </ion-title> <br/>
+    <ion-title class="ion-text-center"> Regístrate </ion-title> <br/>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title> Completa tu perfil </ion-title>
+      <ion-title> Regístrate </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -66,11 +66,11 @@
       </ion-row>
 
       <ion-row class="ion-justify-content-center">
-          <ion-button>
+          <!-- <ion-button>
             <ion-icon slot="start" name="logo-facebook"></ion-icon>
             Facebook
-          </ion-button>
-          <ion-button color="danger">
+          </ion-button> -->
+          <ion-button (click)="registerUserGoogle()" color="danger">
             <ion-icon slot="start" name="logo-google"></ion-icon>
             Google
           </ion-button>

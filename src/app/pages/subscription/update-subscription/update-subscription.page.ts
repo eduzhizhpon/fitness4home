@@ -41,7 +41,7 @@ export class UpdateSubscriptionPage implements OnInit {
 
   cancelSubscription(): void {
     console.log('Se cancela la subscripción');
-    this.router.navigate(['subscription/cancel']);
+    this.router.navigate(['subscription-update/cancel']);
   }
 
   async presentAlertConfirm(): Promise<string> {
