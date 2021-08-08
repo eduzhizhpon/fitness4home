@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Schedule } from '@social/domain/schedule';
 import { Session } from '@social/domain/session';
-import { ConectionService } from '@social/services/conection.service';
 
 @Component({
   selector: 'app-start-session-coach',
@@ -15,8 +14,7 @@ export class StartSessionCoachPage implements OnInit {
   schedules: Schedule[];
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private conectionService: ConectionService) {
+    private router: Router) {
       route.queryParams.subscribe(params =>{
         this.session = this.router.getCurrentNavigation().extras.queryParams.session;
         if(this.session.schedule != null){

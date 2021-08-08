@@ -8,12 +8,15 @@ import { StartSessionCoachPageRoutingModule } from './start-session-coach-routin
 
 import { StartSessionCoachPage } from './start-session-coach.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StartSessionCoachPageRoutingModule
+    StartSessionCoachPageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [StartSessionCoachPage]
 })

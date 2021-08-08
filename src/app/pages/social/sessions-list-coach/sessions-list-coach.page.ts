@@ -46,7 +46,7 @@ export class SessionsListCoachPage implements OnInit {
         session: session
       }
     }
-    this.router.navigate(['/start-session-coach'], params);
+    this.router.navigate(['/session-coach/start-session'], params);
   }
 
 }
