@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { Schedule } from 'src/app/domain/schedule';
-import { Session } from 'src/app/domain/session';
-import { ConectionService } from 'src/app/services/conection.service';
+import { Router } from '@angular/router';
+import { Schedule } from '@social/domain/schedule';
+import { Session } from '@social/domain/session';
+import { ConectionService } from '@social/services/conection.service';
 
 @Component({
-  selector: 'app-sessions-list-coach',
-  templateUrl: './sessions-list-coach.page.html',
-  styleUrls: ['./sessions-list-coach.page.scss'],
+  selector: 'app-sessions-coach',
+  templateUrl: './sessions-coach.page.html',
+  styleUrls: ['./sessions-coach.page.scss'],
 })
-export class SessionsListCoachPage implements OnInit {
+export class SessionsCoachPage implements OnInit {
 
   sessions: any;
   schedules: Schedule[];
-  coachId: string;
 
   constructor(private router: Router,
     private conectionServices: ConectionService) { }
 
   ngOnInit() {
-    this.coachId = "coach1"//get user id -coach
     this.sessions = this.conectionServices.getSessions();
     this.loadSchedules();
   }
@@ -40,13 +38,11 @@ export class SessionsListCoachPage implements OnInit {
     }
   }
 
-  startSession(session: Session){
-    let params: NavigationExtras = {
-      queryParams: {
-        session: session
-      }
-    }
-    this.router.navigate(['/start-session-coach'], params);
+  aceptSession(session: Session){
+    session.cid = "coach1"//get user id -coach
+    session.state = "Aceptado"
+    console.log(session);
+    this.conectionServices.saveSession(session);
   }
 
 }

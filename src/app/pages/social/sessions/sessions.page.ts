@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { Schedule } from 'src/app/domain/schedule';
-import { Session } from 'src/app/domain/session';
-import { ConectionService } from 'src/app/services/conection.service';
+import { Schedule } from '@social/domain/schedule';
+import { Session } from '@social/domain/session';
+import { ConectionService } from '@social/services/conection.service';
 
 @Component({
   selector: 'app-sessions',

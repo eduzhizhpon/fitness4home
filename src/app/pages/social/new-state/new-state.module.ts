@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { NewStatePageRoutingModule } from './new-state-routing.module';
 
 import { NewStatePage } from './new-state.page';
-import { TakePhotoComponent } from 'src/app/components/take-photo/take-photo.component';
+import { TakePhotoComponent } from '@social/components/take-photo/take-photo.component';
 
 @NgModule({
   imports: [

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Session } from '../domain/session';
-import { State } from '../domain/state';
+import { Session } from '@social/domain/session';
+import { State } from '@social/domain/state';
 
 @Injectable({
   providedIn: 'root'

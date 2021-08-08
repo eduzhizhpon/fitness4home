@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { State } from 'src/app/domain/state';
-import { ConectionService } from 'src/app/services/conection.service';
+import { State } from '@social/domain/state';
+import { ConectionService } from '@social/services/conection.service';
 
 @Component({
   selector: 'app-new-state',

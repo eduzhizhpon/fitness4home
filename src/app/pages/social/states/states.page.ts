@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConectionService } from 'src/app/services/conection.service';
+import { ConectionService } from '@social/services/conection.service';
 
 @Component({
   selector: 'app-states',
