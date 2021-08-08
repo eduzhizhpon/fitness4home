@@ -62,7 +62,7 @@ export class SessionsPage implements OnInit {
         session: this.session
       }
     }
-    this.router.navigate(['/new-session'], params);
+    this.router.navigate(['/session-user/new-session'], params);
   }
 
   loadSession(number: any, session: any){
@@ -72,7 +72,7 @@ export class SessionsPage implements OnInit {
         session: session
       }
     }
-    this.router.navigate(['/new-session'], params);
+    this.router.navigate(['/session-user/new-session'], params);
   }
 
   cancelSession(){

@@ -8,12 +8,16 @@ import { NewSessionPageRoutingModule } from './new-session-routing.module';
 
 import { NewSessionPage } from './new-session.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewSessionPageRoutingModule
+    NewSessionPageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [NewSessionPage]
 })
