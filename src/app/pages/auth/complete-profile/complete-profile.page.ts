@@ -38,7 +38,7 @@ export class CompleteProfilePage implements OnInit {
           this.user = this.router.getCurrentNavigation().extras.queryParams.user;
         }
         this.flag = this.user.userType === 'coach' ? true : false;
-        this.user.profilePhoto = './assets/icon/';
+        this.user.profilePhoto = './assets/icon/user.png';
       });
   }
 
