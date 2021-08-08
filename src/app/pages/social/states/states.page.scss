@@ -1,0 +1,26 @@
+.image-center-content { 
+    height: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.center-content { 
+    height: 90%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.parent {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.borderSlide {
+    width: 85%;
+    height: 70vh;
+    border: 2px solid #3700ff;
+    border-radius: 20px;
+}

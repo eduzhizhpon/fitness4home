@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Estados
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" scroll-y="false">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Estados</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <h2 style="text-align: center;">Mira todos los estados</h2>
+
+  <div class="center-content">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let state of states | async" class="borderSlide">
+          <ion-card class="center-content">
+            <div>
+              <ion-card-header>
+                <ion-card-title>Usuario</ion-card-title>
+              </ion-card-header>
+                <ion-img style="pointer-events:none;" [src]="state.image?.url"></ion-img>
+              <ion-card-content>
+                <h4>{{state.title}}</h4>
+                <p>{{state.description}}</p>
+              </ion-card-content>
+            </div>
+          </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newState()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

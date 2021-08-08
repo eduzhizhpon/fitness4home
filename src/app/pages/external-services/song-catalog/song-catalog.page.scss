@@ -1,0 +1,17 @@
+.item {
+    margin: 1.5rem 0.5rem;
+    padding: 0.2rem;
+}
+
+.song-img {
+    width: 100px;
+    height: 100px;
+}
+
+.song-info > * {
+    margin: 0.5rem 0.2rem;
+}
+
+ion-avatar {
+    --border-radius: 0.3rem;
+}

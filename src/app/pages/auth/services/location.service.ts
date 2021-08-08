@@ -9,11 +9,11 @@ export class LocationService {
   constructor(private platform: Platform) { }
 
   async getCurrentLocation(withAddress: boolean = true): Promise<any> {
-    const location: any = {};
+    let location: any = {};
 
     return new Promise((resolve, reject) => {
       if (navigator.geolocation) {
-        const options = {
+        var options = {
           frequency: 1000,
           timeout: 15000,
           enableHighAccuracy: true
@@ -23,8 +23,8 @@ export class LocationService {
             location.latitude = position.coords.latitude;
             location.longitude = position.coords.longitude;
             if (withAddress) {
-              const geocoder = new google.maps.Geocoder();
-              const latlng = { lat: location.latitude, lng: location.longitude };
+              let geocoder = new google.maps.Geocoder();
+              let latlng = { lat: location.latitude, lng: location.longitude };
               geocoder.geocode({ location: latlng }, (results, status) => {
                 if (results != null && results !== undefined) {
                   location.address = results[0].formatted_address;
@@ -45,8 +45,8 @@ export class LocationService {
   }
 
   async getAddressOfLocation(location: any) {
-    const geocoder = new google.maps.Geocoder();
-    const latlng = { lat: location.latitude, lng: location.longitude };
+    let geocoder = new google.maps.Geocoder();
+    let latlng = { lat: location.latitude, lng: location.longitude };
     geocoder.geocode({ location: latlng }, (results, status) => {
       if (results != null) {
         // console.log(results);
