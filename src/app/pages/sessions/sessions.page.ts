@@ -31,7 +31,7 @@ export class SessionsPage implements OnInit {
     this.sessions = this.conectionServices.getSessions();
     this.sessions.forEach((element: any[]) => {
       element.forEach(e => {
-        if(e.uid == "1"){
+        if(e.uid == "1"){//get user id
           this.session = e;
           if(this.session.schedule != null){
             this.session.schedule.forEach(e => {

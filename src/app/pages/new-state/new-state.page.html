@@ -13,31 +13,40 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item>
-    <ion-label position="floating">Actividad:</ion-label>
-    <ion-input [(ngModel)]="state.title"></ion-input>
-  </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Actividad:</ion-label>
+      <ion-input [(ngModel)]="state.title"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Descripción:</ion-label>
-    <ion-input [(ngModel)]="state.description"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción:</ion-label>
+      <ion-input [(ngModel)]="state.description"></ion-input>
+    </ion-item>
 
-
-  <app-take-photo source="photo" (imageSelected)="imageSelectedEvt($event)" 
-  (uploadFinished)="uploadFinishedEvt($event)"></app-take-photo>
-
-  <app-take-photo source="none" (imageSelected)="imageSelectedEvt($event)" 
-  (uploadFinished)="uploadFinishedEvt($event)"></app-take-photo>
-
-  <ion-card *ngIf="state.image?.url != null">
-    <ion-img [src]="state.image?.url"></ion-img>
-  </ion-card>
-
-  <ion-card *ngIf="state.image?.url == null">
-    <ion-img src="https://byspel.com/wp-content/uploads/2017/01/upload-cloud.png"></ion-img>
-  </ion-card>
-
+    <ion-item>
+      <div style="text-align: center; width: 50%;">
+        <app-take-photo source="photo" (imageSelected)="imageSelectedEvt($event)" 
+        (uploadFinished)="uploadFinishedEvt($event)"></app-take-photo>
+      </div>
+      <div style="text-align: center; width: 50%;">
+        <app-take-photo source="none" (imageSelected)="imageSelectedEvt($event)" 
+        (uploadFinished)="uploadFinishedEvt($event)"></app-take-photo>
+      </div>
+    </ion-item>
+    
+    <ion-item>
+      <ion-card *ngIf="state.image?.url != null">
+        <ion-img [src]="state.image?.url"
+        style="width: 50%; margin: auto;"></ion-img>
+      </ion-card>
+      <ion-card *ngIf="state.image?.url == null">
+        <ion-img src="https://byspel.com/wp-content/uploads/2017/01/upload-cloud.png" 
+        style="width: 50%; margin: auto;"></ion-img>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+    
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click)="saveState()">
       <ion-icon name="save-outline"></ion-icon>
