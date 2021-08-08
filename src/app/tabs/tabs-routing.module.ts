@@ -21,7 +21,16 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: () => import('@auth-app/home/home.module').then(m => m.HomePageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('@auth-app/home/home.module').then(m => m.HomePageModule)
+          },
+          {
+            path: 'my-profile',
+            loadChildren: () => import('@auth-app/my-profile/my-profile.module').then(m => m.MyProfilePageModule)
+          },
+        ]
       },
       {
         path: 'music',
@@ -43,10 +52,6 @@ const routes: Routes = [
       },
 
 
-      {
-        path: 'home/my-profile',
-        loadChildren: () => import('@auth-app/my-profile/my-profile.module').then(m => m.MyProfilePageModule)
-      },
       {
         path: 'home/states',
         loadChildren: () => import('@social/states/states.module').then(m => m.StatesPageModule)
@@ -82,7 +87,7 @@ const routes: Routes = [
         loadChildren: () => import('@social/start-session-coach/start-session-coach.module').then(m => m.StartSessionCoachPageModule)
       },
 
-      
+
       {
         path: '',
         redirectTo: '/home',

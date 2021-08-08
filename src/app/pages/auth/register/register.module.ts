@@ -8,8 +8,11 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
+    CoreSharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
