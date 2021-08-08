@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        loadChildren: () => import('@auth-app/home/home.module').then(m => m.HomePageModule)
       },
       {
         path: 'music',
