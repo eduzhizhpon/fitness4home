@@ -78,16 +78,12 @@ const routes: Routes = [
 
 
       {
-        path: 'session-user/new-sesion',
+        path: 'session-user/new-session',
         loadChildren: () => import('@social/new-session/new-session.module').then(m => m.NewSessionPageModule)
       },
       {
-        path: 'session-coach/start-sesion',
+        path: 'session-coach/start-session',
         loadChildren: () => import('@social/start-session-coach/start-session-coach.module').then(m => m.StartSessionCoachPageModule)
-      },
-      {
-        path: 'session-user/new-sesion',
-        loadChildren: () => import('@social/new-session/new-session.module').then(m => m.NewSessionPageModule)
       },
       {
         path: 'session-coach/start-session',

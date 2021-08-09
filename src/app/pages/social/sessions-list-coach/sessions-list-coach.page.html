@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
   <ion-toolbar>
     <ion-title>
       Sesiones Aceptadas
@@ -13,11 +14,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngFor="let session of sessions | async">
-    <ion-item (click)="startSession(session)"
-    *ngIf="session.cid == coachId && session.state == 'Aceptado'">
+  <ion-list *ngFor="let session of sessions">
+    <ion-item *ngIf="session.cid == coach.uid && session.state == 'Aceptado'" (click)="startSession(session)">
       <ion-label>
-        <h3>User</h3>
+        <div *ngFor="let user of users">
+          <h3 *ngIf="session.uid == user.uid">{{user.name}}</h3>
+        </div>
         <div *ngFor="let schedule of schedules">
           <p *ngIf="schedule.sid == session.id">{{schedule.day}}, {{schedule.hour_start}} - {{schedule.hour_end}} {{schedule.type}}</p>
         </div>

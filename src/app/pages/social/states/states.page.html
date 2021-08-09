@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
   <ion-toolbar>
     <ion-title>
       Estados
@@ -21,7 +22,9 @@
           <ion-card class="center-content">
             <div>
               <ion-card-header>
-                <ion-card-title>Usuario</ion-card-title>
+                <div *ngFor="let user of users | async">
+                  <ion-card-title *ngIf="state.uid == user.uid">{{user.name}}</ion-card-title>
+                </div>
               </ion-card-header>
                 <ion-img style="pointer-events:none;" [src]="state.image?.url"></ion-img>
               <ion-card-content>

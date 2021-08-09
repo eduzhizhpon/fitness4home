@@ -8,12 +8,15 @@ import { SessionsListCoachPageRoutingModule } from './sessions-list-coach-routin
 
 import { SessionsListCoachPage } from './sessions-list-coach.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SessionsListCoachPageRoutingModule
+    SessionsListCoachPageRoutingModule,
+    CoreSharedModule
   ],
   declarations: [SessionsListCoachPage]
 })

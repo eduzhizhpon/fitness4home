@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
   <ion-toolbar>
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
@@ -14,8 +15,8 @@
   <div style="text-align: center;">
     <h2>Reunión online</h2>
     <ion-card>
-      <h3>Sesión por zoom con Usuario</h3>
-      <ion-button>Iniciar la reunión</ion-button>
+      <h3>Sesión por zoom con {{user.name}}</h3>
+      <app-zoom-meeting meetingType="coach" meetingNumber="login.zoomIdMeeting" meetingPassword="login.zoomPasswordMeeting" displayName="login.name"></app-zoom-meeting>
     </ion-card>
   </div>
   <ion-title>Horarios</ion-title>

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@auth-app/domain/user';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
 import { Schedule } from '@social/domain/schedule';
 import { Session } from '@social/domain/session';
 import { ConectionService } from '@social/services/conection.service';
+import { UserFirebaseService } from '@social/services/user-firebase.service';
 
 @Component({
   selector: 'app-sessions-coach',
@@ -10,39 +13,42 @@ import { ConectionService } from '@social/services/conection.service';
   styleUrls: ['./sessions-coach.page.scss'],
 })
 export class SessionsCoachPage implements OnInit {
-
-  sessions: any;
+  
+  sessions: Session[];
   schedules: Schedule[];
+  users: User[];
 
   constructor(private router: Router,
-    private conectionServices: ConectionService) { }
+    private conectionServices: ConectionService,
+    private authService: AuthenticationService,
+    private userService: UserFirebaseService) { }
 
   ngOnInit() {
-    this.sessions = this.conectionServices.getSessions();
-    this.loadSchedules();
-  }
-
-  loadSchedules(){
-    this.schedules = [];
-    if(this.sessions != null){
-      this.sessions.forEach((element: any) => {
-        element.forEach((session: any) => {
-          if(session.schedule != null){
-            session.schedule.forEach((e: any) => {
-              let schedule: Schedule = JSON.parse(e);
-              this.schedules.push(schedule);
-            });
-          }
+    this.conectionServices.getSessions().subscribe((s: Session[]) => {
+      this.sessions = s;
+      this.schedules = [];
+      this.sessions.forEach((session: Session) => {
+        this.userService.getUsers().subscribe((u: User[]) => {
+          this.users = u;
+        });
+        session.schedule.forEach((schedule: any) => {
+          let scdl: Schedule = JSON.parse(schedule);
+          this.schedules.push(scdl);
         });
       });
-    }
+    });
   }
 
   aceptSession(session: Session){
-    session.cid = "coach1"//get user id -coach
-    session.state = "Aceptado"
-    console.log(session);
-    this.conectionServices.saveSession(session);
+    this.authService.getCurrentUser().then( (user: User) => {
+      session.cid = user.uid;
+      session.state = "Aceptado";
+      console.log(session);
+      this.conectionServices.saveSession(session);
+      this.sessions = [];
+      this.users = [];
+      this.schedules = [];
+    });    
   }
 
 }

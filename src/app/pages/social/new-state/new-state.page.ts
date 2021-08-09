@@ -25,7 +25,7 @@ export class NewStatePage implements OnInit {
       this.state.image != null){
 
       this.conectionService.saveState(this.state);
-      this.router.navigate(['/tabs/tab2']);
+      this.router.navigate(['/home/states']);
     }
   }
 

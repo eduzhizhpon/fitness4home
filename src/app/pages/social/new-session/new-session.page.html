@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
   <ion-toolbar>
     <ion-title *ngIf="schedule.id == null">
       Sesión #{{number}}
@@ -27,7 +28,7 @@
       <ion-select [(ngModel)]="schedule.day" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione uno">
         <ion-select-option value="Lunes">Lunes</ion-select-option>
         <ion-select-option value="Martes">Martes</ion-select-option>
-        <ion-select-option value="Miercoles">Miercoles</ion-select-option>
+        <ion-select-option value="Miercoles">Miércoles</ion-select-option>
         <ion-select-option value="Jueves">Jueves</ion-select-option>
         <ion-select-option value="Viernes">Viernes</ion-select-option>
       </ion-select>
@@ -48,7 +49,7 @@
       <ion-label>Sesión</ion-label>
       <ion-select placeholder="Seleccione uno" [(ngModel)]="schedule.type">
         <ion-select-option value="Online">Online</ion-select-option>
-        <ion-select-option value="Precencial">Precensial</ion-select-option>
+        <ion-select-option value="Presencial">Presencial</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -65,13 +66,15 @@
       <p>Día: {{schedule.day}}</p>
       <p>Hora de inicio: {{schedule.hour_start}}</p>
       <p>Hora de Finalización: {{schedule.hour_end}}</p>
-      <ion-button *ngIf="session.state == 'Aceptado'">Unirse a la reunión</ion-button>
+      <div *ngIf="session.state == 'Aceptado'">
+        <app-zoom-meeting meetingType="user" meetingNumber="coach.zoomIdMeeting" meetingPassword="coach.zoomPasswordMeeting" displayName="login.name"></app-zoom-meeting>
+      </div>
     </ion-card>
   </div>
 
   <div style="text-align: center;" *ngIf="schedule.id != null &&
-  schedule.type == 'Precencial'">
-    <h3>Sesión Precensial</h3>
+  schedule.type == 'Presencial'">
+    <h3>Sesión Presencial</h3>
     <ion-card>
       <ion-label>
         <h1>Horario</h1>

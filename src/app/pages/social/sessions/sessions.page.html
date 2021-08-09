@@ -1,14 +1,14 @@
 <ion-header [translucent]="true">
   <app-name-icon></app-name-icon>
   <ion-toolbar>
-    <ion-title> Sesiones </ion-title>
+    <ion-title> Sesiones de Entrenamiento </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Sesiones</ion-title>
+      <ion-title size="large">Sesiones de Entrenamiento</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -62,10 +62,6 @@
         </ion-label>
       </ion-item>
     </ion-list>
-  </div>
-
-  <div style="text-align: center;" *ngIf="session.schedule != null">
-    <ion-button color="danger" (click)="cancelSession()">Cancelar Sesión Entrenamiento</ion-button>
   </div>
   
 </ion-content>

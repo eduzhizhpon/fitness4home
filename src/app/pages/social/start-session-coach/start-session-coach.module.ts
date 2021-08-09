@@ -8,12 +8,17 @@ import { StartSessionCoachPageRoutingModule } from './start-session-coach-routin
 
 import { StartSessionCoachPage } from './start-session-coach.page';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+import { ZoomSharedModule } from '@shared/modules/zoom-shared/zoom-shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StartSessionCoachPageRoutingModule
+    StartSessionCoachPageRoutingModule,
+    CoreSharedModule,
+    ZoomSharedModule
   ],
   declarations: [StartSessionCoachPage]
 })
