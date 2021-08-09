@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@auth-app/domain/user';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
+import { TierManageService } from '@subscription/services/tier-manage.service';
 
 @Component({
   selector: 'app-cancel-subscription',
@@ -8,14 +11,30 @@ import { Router } from '@angular/router';
 })
 export class CancelSubscriptionPage implements OnInit {
 
-  constructor(private router: Router) { }
+  nextBill: Date;
+
+  constructor(private router: Router, private authService: AuthenticationService,
+    private tierService: TierManageService) {
+    this.authService.getCurrentUser().then( (user: User) => {
+      if (user) {
+        this.nextBill = user.nextBill;
+      } else {
+        router.navigate(['/auth/login']);
+      }
+    });
+  }
 
   ngOnInit() {
   }
 
   onRouterHome() {
-    console.log('Regreso al inicio');
-    this.router.navigate(['/home']);
+    if (this.tierService.validBill(this.nextBill)) {
+      this.router.navigate(['/home']);
+    } else {
+      this.authService.logout().then( () =>
+        this.router.navigate(['/auth/login'])
+      );
+    }
   }
 
 }

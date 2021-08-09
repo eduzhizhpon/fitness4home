@@ -18,6 +18,14 @@ const routes: Routes = [
     path: 'auth/complete-profile',
     loadChildren: () => import('./pages/auth/complete-profile/complete-profile.module').then( m => m.CompleteProfilePageModule)
   },
+  {
+    path: 'subscription',
+    loadChildren: () => import('@subscription/subscription/subscription.module').then( m => m.SubscriptionPageModule)
+  },
+  {
+    path: 'admin/coach',
+    loadChildren: () => import('./pages/social/admin-coach/admin-coach.module').then( m => m.AdminCoachPageModule)
+  },
 ];
 @NgModule({
   imports: [

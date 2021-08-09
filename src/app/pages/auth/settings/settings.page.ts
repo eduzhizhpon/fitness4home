@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
 
 @Component({
   selector: 'app-settings',
@@ -17,7 +18,8 @@ export class SettingsPage implements OnInit {
     }
   ]
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private authService: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -28,6 +30,8 @@ export class SettingsPage implements OnInit {
   }
 
   logout() {
-    console.log('Se cierra la sesión');
+    this.authService.logout().then((value: any) => {
+      this.router.navigate(['/auth/login']);
+    });
   }
 }

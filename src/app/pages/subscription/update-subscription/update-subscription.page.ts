@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { User } from '@auth-app/domain/user';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
+import { AlertController, ToastController } from '@ionic/angular';
+import { UserFirebaseService } from '@social/services/user-firebase.service';
+import { TierManageService } from '@subscription/services/tier-manage.service';
 
 @Component({
   selector: 'app-update-subscription',
@@ -13,13 +17,21 @@ export class UpdateSubscriptionPage implements OnInit {
   currentSubscriptionTier: string;
   enableFeedback: boolean;
 
-  constructor(public alertController: AlertController, private router: Router) {
+  nextBill: Date;
+
+  constructor(private authService: AuthenticationService, private ufb: UserFirebaseService,
+    private toastController: ToastController, private tierManageService: TierManageService,
+    public alertController: AlertController, private router: Router) {
     this.enableFeedback = false;
   }
 
-  ngOnInit() {
-    this.currentSubscriptionTier = '1';
-    this.subscriptionTier = this.currentSubscriptionTier;
+  async ngOnInit() {
+    await this.authService.getCurrentUser().then( (user: User) => {
+      this.currentSubscriptionTier = user.tier + "";
+      this.subscriptionTier = this.currentSubscriptionTier;
+    }).catch( () => {
+      this.router.navigate(['/auth/login']);
+    });
   }
 
   setSubscriptionTier(event: string): void {
@@ -27,7 +39,19 @@ export class UpdateSubscriptionPage implements OnInit {
   }
 
   onUpdateSubscribe(): void {
-    this.enableFeedback = true;
+    this.authService.getCurrentUser().then( (user: User) => {
+      user.tier =  +this.subscriptionTier;
+      user.nextBill = this.tierManageService.getNextBill(new Date(), user.tier);
+      this.nextBill = user.nextBill;
+      this.ufb.saveUser(user).then( (data) => {
+        this.enableFeedback = true;
+      });
+    }).catch( (reason) => {
+      console.log(reason);
+      const msg = 'Ha ocurrido un error al actualizar el plan de subscripión';
+      const colorCode = 'danger';
+      this.showToast(msg, colorCode, 3500);
+    });
     console.log(this.subscriptionTier);
   }
 
@@ -39,9 +63,17 @@ export class UpdateSubscriptionPage implements OnInit {
     });
   }
 
-  cancelSubscription(): void {
+  async cancelSubscription(): Promise<void> {
+    await this.authService.getCurrentUser().then( (user: User) => {
+      user.tier = 0;
+      this.ufb.saveUser(user).then( () => {
+        this.router.navigate(['subscription-update/cancel']);
+      });
+    }).catch( () => {
+      this.router.navigate(['/auth/login']);
+    });
+
     console.log('Se cancela la subscripción');
-    this.router.navigate(['subscription/cancel']);
   }
 
   async presentAlertConfirm(): Promise<string> {
@@ -65,8 +97,15 @@ export class UpdateSubscriptionPage implements OnInit {
     return role;
   }
 
+  showToast(msg: string, colorCode: string, durationMsg: number = 2000) {
+    this.toastController.create({
+      message: msg,
+      duration: durationMsg,
+      color: colorCode
+    }).then(toast => toast.present());
+  }
+
   onRouterHome(): void {
-    console.log('Ir al Home');
     this.router.navigate(['/home']);
   }
 

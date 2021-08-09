@@ -59,6 +59,29 @@ export class RegisterPage implements OnInit {
     }
   }
 
+  registerUserGoogle(){
+    if (this.user.userType != null) {
+      console.log('Pasa sin null');
+      this.authService.googleLogin().then( (data) => {
+        console.log('Datos de registro' + data);
+        const params: NavigationExtras = {
+          queryParams: {
+            user: this.user,
+            password: this.password,
+            provider: 'google'
+          }
+        };
+        this.router.navigate(['/auth/complete-profile'], params);
+      }).catch( (reason) => {
+        const msg = 'Ha ocurrido un error: ' + reason.message;
+        const colorCode = 'danger';
+        this.showToast(msg, colorCode);
+      });
+    } else {
+      this.showToast('Elija primero el tipo de usuario', 'danger');
+    }
+  }
+
   showToast(msg: string, colorCode: string) {
     this.toastController.create({
       message: msg,

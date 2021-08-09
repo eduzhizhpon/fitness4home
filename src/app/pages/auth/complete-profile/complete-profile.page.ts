@@ -36,6 +36,7 @@ export class CompleteProfilePage implements OnInit {
 
   constructor(private locationService: LocationService,
     private authService: AuthenticationService,
+
     private router: Router, private route: ActivatedRoute,
     private toastController: ToastController) {
 
@@ -54,7 +55,9 @@ export class CompleteProfilePage implements OnInit {
   async ngOnInit() { }
 
   setDefaultProfilePhoto(){
-    this.profilePhotoURL = './assets/icon/user.png';
+    if (this.user.profilePhoto == null || this.user.profilePhoto === undefined) {
+      this.profilePhotoURL = './assets/icon/user.png';
+    }
   }
 
   newAddress(event: any) {
@@ -76,19 +79,62 @@ export class CompleteProfilePage implements OnInit {
     this.user.profilePhoto = this.profilePhotoURL;
   }
 
-  updateUser() {
-    this.authService.updateUserData(this.user, this.provider).then( (data) => {
-      this.authService.emailPasswordLogin(this.user.email, this.password).then( (data1: void) => {
-        this.router.navigate(['subscription']);
+  completeProfile() {
+    console.log('Complete Profile');
+    this.user.tier = 0;
+    if (this.provider === 'email') {
+      this.continueWithEmail();
+    } else {
+      this.continueWithGoogle();
+    }
+  }
+
+  continueWithEmail() {
+    this.authService.emailPasswordLogin(this.user.email, this.password).then( (log) => {
+      this.authService.getCurrentUser().then( (user: User) => {
+        console.log('Login ' + user);
+        this.user.uid = user.uid;
+        this.user.enabled = true;
+        this.user.tier = 0;
+        this.authService.updateUserData(this.user, this.provider).then( (data) => {
+          this.router.navigate(['subscription']);
+        }).catch( (reason) => {
+          console.log(reason);
+          const msg = 'Ha ocurrido un error al completar el perfil';
+          const colorCode = 'danger';
+          this.showToast(msg, colorCode, 3500);
+        });
       }).catch( (reason) => {
         console.log(reason);
-        const msg = 'Ha ocurrido un error al iniciar sesión';
+        const msg = 'No se ha podido obtener el usuario';
         const colorCode = 'danger';
         this.showToast(msg, colorCode, 3500);
       });
     }).catch( (reason) => {
       console.log(reason);
-      const msg = 'Ha ocurrido un error al completar el perfil';
+      const msg = 'Ha ocurrido un error al iniciar sesión';
+      const colorCode = 'danger';
+      this.showToast(msg, colorCode, 3500);
+    });
+  }
+
+  continueWithGoogle() {
+    this.authService.getCurrentUser().then( (user: User) => {
+      this.user.email = user.email;
+      this.user.uid = user.uid;
+      this.user.enabled = true;
+      this.authService.updateUserData(this.user, this.provider).then( (data) => {
+        this.router.navigate(['subscription']);
+      }).catch( (reason) => {
+        console.log(reason);
+        const msg = 'Ha ocurrido un error al actualizar el perfil con Google';
+        const colorCode = 'danger';
+        this.showToast(msg, colorCode, 3500);
+      });
+
+    }).catch( (reason) => {
+      console.log(reason);
+      const msg = 'Ha ocurrido un error al completar el perfil con Google';
       const colorCode = 'danger';
       this.showToast(msg, colorCode, 3500);
     });

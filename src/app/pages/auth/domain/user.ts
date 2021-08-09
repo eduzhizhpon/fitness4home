@@ -14,4 +14,6 @@ export class User {
     zoomIdMeeting: string;
     zoomPasswordMeeting: string;
     enabled: boolean;
+    tier: number;
+    nextBill: Date;
 }

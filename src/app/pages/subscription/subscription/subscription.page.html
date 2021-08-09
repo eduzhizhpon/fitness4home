@@ -1,10 +1,16 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>subscription</ion-title>
+    <app-name-icon></app-name-icon>
+    <ion-title> Selecciona un plan </ion-title> <br/>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title> Selecciona un plan </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
   <div>
     <ion-grid>

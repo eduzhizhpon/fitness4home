@@ -8,8 +8,19 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'subscription',
-        loadChildren: () => import('@subscription/update-subscription/update-subscription.module').then(m => m.UpdateSubscriptionPageModule)
+        path: 'subscription-update',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('@subscription/update-subscription/update-subscription.module')
+              .then(m => m.UpdateSubscriptionPageModule)
+          },
+          {
+            path: 'cancel',
+            loadChildren: () => import('@subscription/cancel-subscription/cancel-subscription.module')
+              .then(m => m.CancelSubscriptionPageModule)
+          },
+        ]
       },
       {
         path: 'session-user',
@@ -67,11 +78,7 @@ const routes: Routes = [
 
 
       {
-        path: 'subscription/cancel',
-        loadChildren: () => import('@subscription/cancel-subscription/cancel-subscription.module').then(m => m.CancelSubscriptionPageModule)
-      },
-      {
-        path: 'session-user/new-session',
+        path: 'session-user/new-sesion',
         loadChildren: () => import('@social/new-session/new-session.module').then(m => m.NewSessionPageModule)
       },
       {
@@ -86,14 +93,14 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/auth/login',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/auth/login',
     pathMatch: 'full'
   }
 ];
