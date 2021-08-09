@@ -15,11 +15,12 @@
           <ion-col>
             <ion-card>
               <ion-card-header class="ion-text-center">
-                <img class="avatar" src="./assets/icon/fitness.png" >
+                <img class="avatar" [src]="currentUser.profilePhoto" >
               </ion-card-header>
 
               <ion-card-content>
-                <ion-button>Cambiar Imagen</ion-button>
+                <app-upload-image source="none" (imageSelected)="imageSelectedEvt($event)" 
+                  (uploadFinished)="uploadFinishedEvt($event)"></app-upload-image>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -33,13 +34,13 @@
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Nombre</ion-label>
-              <ion-input></ion-input>
+              <ion-input [(ngModel)]="currentUser.name" type="text" inputmode="text"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
               <ion-label position="stacked">Apellido</ion-label>
-              <ion-input></ion-input>
+              <ion-input [(ngModel)]="currentUser.lastname" type="text" inputmode="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -48,7 +49,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Actualiza tu peso (kg)</ion-label>
-              <ion-input type="number" min="0"></ion-input>
+              <ion-input [(ngModel)]="currentUser.weight" type="number" inputmode="decimal" min="0"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -57,14 +58,14 @@
           <ion-col>
             <ion-item>
               <ion-label>Actualiza tu altura (cm)</ion-label>
-              <ion-input type="number" min="0"></ion-input>
+              <ion-input [(ngModel)]="currentUser.height" type="number" inputmode="decimal" min="0"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-text-center">
           <ion-col>
-            <ion-button>
+            <ion-button (click)="updateProfile()">
               <ion-icon slot="start" name="save"></ion-icon>
               Guardar Cambios
             </ion-button>

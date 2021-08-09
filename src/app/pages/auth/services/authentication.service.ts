@@ -77,7 +77,7 @@ export class AuthenticationService {
     }
   }
 
-  async nativeGoogleLogin(): Promise<void>  {
+  async nativeGoogleLogin(): Promise<any>  {
     try {
       const gplusUser: any = await this.googlePlus.login({
         webClientId: environment.googleWebClientId,
@@ -86,19 +86,20 @@ export class AuthenticationService {
 
       const googleCredential = firebase.default.auth.GoogleAuthProvider.credential(gplusUser.idToken);
       const firebaseUser = await firebase.default.auth().signInWithCredential(googleCredential);
-      console.log(JSON.stringify(firebaseUser.user));
-      return await this.updateUserData(firebaseUser.user, 'google');
+      // console.log(JSON.stringify(firebaseUser.user));
+      return firebaseUser.user;
+
     } catch (error) {
       console.error('Error: Login Google - Native' + JSON.stringify(error));
       return error;
     }
   }
 
-  async webGoogleLogin(): Promise<void> {
+  async webGoogleLogin(): Promise<any> {
     try {
       const provider = new firebase.default.auth.GoogleAuthProvider();
       const credential = await this.afAuth.signInWithPopup(provider);
-      return await this.updateUserData(credential.user, 'google');
+      return credential.user;
     } catch (error) {
       console.error('Error: Login Google - Web' + JSON.stringify(error));
       return error;
@@ -110,7 +111,7 @@ export class AuthenticationService {
     try {
       const emailCredential = firebase.default.auth.EmailAuthProvider.credential(email, password);
       const firebaseUser = await firebase.default.auth().signInWithCredential(emailCredential);
-      console.log('Usuario de Firebase ' + JSON.stringify(firebaseUser.user));
+      // console.log('Usuario de Firebase ' + JSON.stringify(firebaseUser.user));
       return await this.updateUserData(firebaseUser.user, 'email');
     } catch (error) {
       // console.log(error);
@@ -120,7 +121,6 @@ export class AuthenticationService {
 
   // ---------
   userExists(email: string) {
-    console.log('userExists - Email: ' + email);
     return this.afs
     .collection('users', ref => ref.where('email', '==', email))
     .valueChanges()
@@ -170,6 +170,7 @@ export class AuthenticationService {
     } else {
       // Actualizar cuenta
       const userUpdated: User = doc[0];
+      console.log('ERERAREA:', JSON.stringify(userUpdated))
       data = {
         uid: userUpdated.uid,
         userType: userUpdated.userType || '',

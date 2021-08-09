@@ -8,9 +8,8 @@
 
   <ion-card>
     <ion-card-header class="ion-text-center">
-      <img class="avatar" src="./assets/icon/fitness.png" alt="Imagen de perfil" >
-      <ion-card-title>Nombres Apellidos</ion-card-title>
-      <ion-card-subtitle>XX años</ion-card-subtitle>
+      <img class="avatar" [src]="currentUser.profilePhoto" alt="Imagen de perfil" >
+      <ion-card-title> {{ currentUser.lastname }}, {{ currentUser.name }} </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -21,7 +20,7 @@
             <ion-card>
               <ion-card-content>
                 <ion-label><h2>Mi peso</h2></ion-label>
-                <ion-label><h1>XX.X kg</h1></ion-label>
+                <ion-label><h1>{{ currentUser.weight }} kg</h1></ion-label>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -30,7 +29,7 @@
             <ion-card>
               <ion-card-content>
                 <ion-label><h2>Mi altura</h2></ion-label>
-                <ion-label><h1>XX.X cm</h1></ion-label>
+                <ion-label><h1>{{ currentUser.height }} cm</h1></ion-label>
               </ion-card-content>
             </ion-card>
           </ion-col>

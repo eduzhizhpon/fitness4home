@@ -1,7 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <app-name-icon></app-name-icon>
-    <ion-title class="ion-text-center"> Completa tu perfil </ion-title> <br/>
+
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/auth/register"></ion-back-button>
+      </ion-buttons>
+      <ion-title> Completa tu perfil </ion-title>
+    </ion-toolbar>
   </ion-toolbar>
 </ion-header>
 

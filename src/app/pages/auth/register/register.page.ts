@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 
 import { ToastController } from '@ionic/angular';
+import { UserFirebaseService } from '@social/services/user-firebase.service';
 
 import { User } from '../domain/user';
 import { AuthenticationService } from '../services/authentication.service';
@@ -20,7 +21,7 @@ export class RegisterPage implements OnInit {
   private password: string;
 
   constructor(private authService: AuthenticationService,
-    private toastController: ToastController,
+    private toastController: ToastController, private ufb: UserFirebaseService,
     private router: Router) { }
 
   ngOnInit() {
@@ -28,7 +29,6 @@ export class RegisterPage implements OnInit {
   }
 
   userTypeChanged(ev: any) {
-    console.log('Type changed', ev.detail.value);
     this.user.userType = ev.detail.value;
     if (this.user.userType === 'user') {
       this.isAnUser = true;
@@ -38,7 +38,6 @@ export class RegisterPage implements OnInit {
   }
 
   registerUserEmail(){
-    console.log(this.user);
     if (this.user.userType != null){
       this.authService.signupUser(this.user, this.password).then( (data) => {
         const params: NavigationExtras = {
@@ -61,9 +60,11 @@ export class RegisterPage implements OnInit {
 
   registerUserGoogle(){
     if (this.user.userType != null) {
-      console.log('Pasa sin null');
-      this.authService.googleLogin().then( (data) => {
-        console.log('Datos de registro' + data);
+      this.authService.googleLogin().then( (userGoogle) => {
+        this.user.uid = userGoogle.uid;
+        this.user.email = userGoogle.email;
+        this.user.enabled = true;
+        this.user.tier = 0;
         const params: NavigationExtras = {
           queryParams: {
             user: this.user,
