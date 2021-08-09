@@ -110,10 +110,11 @@ export class AuthenticationService {
     try {
       const emailCredential = firebase.default.auth.EmailAuthProvider.credential(email, password);
       const firebaseUser = await firebase.default.auth().signInWithCredential(emailCredential);
+      console.log('Usuario de Firebase ' + JSON.stringify(firebaseUser.user));
       return await this.updateUserData(firebaseUser.user, 'email');
     } catch (error) {
-      console.log(error);
-      return error;
+      // console.log(error);
+      throw error;
     }
   }
 
@@ -168,22 +169,23 @@ export class AuthenticationService {
             };
     } else {
       // Actualizar cuenta
+      const userUpdated: User = doc[0];
       data = {
-        uid: user.uid,
-        userType: user.userType || '',
-        email: user.email || null,
-        profilePhoto: user.photoURL || './assets/icon/user.png',
-        name: user.displayName || user.name || '',
-        lastname: user.lastname || '',
-        birthday: user.birthday || '',
-        phoneNumber: user.phoneNumber || '',
-        weight: user.weight || '',
-        height: user.height || '',
-        homeLatitude: user.homeLatitude || '',
-        homeLongitude: user.homeLongitude || '',
-        zoomIdMeeting: user.zoomIdMeeting || '',
-        zoomPasswordMeeting: user.zoomPasswordMeeting || '',
-        enabled: user.enabled,
+        uid: userUpdated.uid,
+        userType: userUpdated.userType || '',
+        email: userUpdated.email || null,
+        profilePhoto: userUpdated.profilePhoto || './assets/icon/user.png',
+        name: userUpdated.name || '',
+        lastname: userUpdated.lastname || '',
+        birthday: userUpdated.birthday || '',
+        phoneNumber: userUpdated.phoneNumber || '',
+        weight: userUpdated.weight || '',
+        height: userUpdated.height || '',
+        homeLatitude: userUpdated.homeLatitude || '',
+        homeLongitude: userUpdated.homeLongitude || '',
+        zoomIdMeeting: userUpdated.zoomIdMeeting || '',
+        zoomPasswordMeeting: userUpdated.zoomPasswordMeeting || '',
+        enabled: userUpdated.enabled,
         provider,
         lastLogin: new Date(),
       };
