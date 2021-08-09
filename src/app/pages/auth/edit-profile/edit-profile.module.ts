@@ -8,6 +8,8 @@ import { EditProfilePageRoutingModule } from './edit-profile-routing.module';
 
 import { EditProfilePage } from './edit-profile.page';
 
+import { UploadImageComponent } from '../components/upload-image/upload-image.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { EditProfilePage } from './edit-profile.page';
     IonicModule,
     EditProfilePageRoutingModule
   ],
-  declarations: [EditProfilePage]
+  declarations: [EditProfilePage, UploadImageComponent]
 })
 export class EditProfilePageModule {}
