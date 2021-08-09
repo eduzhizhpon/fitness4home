@@ -11,15 +11,15 @@
     <ion-card-content class="ion-text-center">
       <ion-item>
         <ion-label class="ion-text-center" position="floating">Correo electrónico</ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input [(ngModel)]="user.email" type="email"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label class="ion-text-center" position="floating">Contraseña</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
       </ion-item>
 
-      <ion-button color="success" expand="block">Iniciar Sesión</ion-button> <br>
+      <ion-button (click)="loginWithEmail()" color="success" expand="block">Iniciar Sesión</ion-button> <br>
       <ion-label>¿Olvidaste la contraseña? <a [routerLink]="['/']">¡Recupérala!</a> </ion-label>
       
       <hr>
@@ -30,12 +30,12 @@
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
-          <ion-button>
+          <!-- <ion-button>
             <ion-icon slot="start" name="logo-facebook"></ion-icon>
             Facebook
-          </ion-button>
+          </ion-button> -->
 
-          <ion-button color="danger">
+          <ion-button (click)="loginWithGoogle()" color="danger">
             <ion-icon slot="start" name="logo-google"></ion-icon>
             Google
           </ion-button>
