@@ -60,7 +60,7 @@ export class AuthenticationService {
     try {
       return this.afAuth.sendPasswordResetEmail(email);
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 

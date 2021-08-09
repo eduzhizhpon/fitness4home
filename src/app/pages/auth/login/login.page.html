@@ -20,7 +20,11 @@
       </ion-item>
 
       <ion-button (click)="loginWithEmail()" color="success" expand="block">Iniciar Sesión</ion-button> <br>
-      <ion-label>¿Olvidaste la contraseña? <a [routerLink]="['/']">¡Recupérala!</a> </ion-label>
+      
+      <ion-item>
+        <ion-label>¿Olvidaste la contraseña?</ion-label>
+        <ion-button (click)="openModal()">¡Recupérala!</ion-button>
+      </ion-item>
       
       <hr>
 
