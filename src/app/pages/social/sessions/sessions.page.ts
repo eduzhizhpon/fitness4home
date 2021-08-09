@@ -83,14 +83,6 @@ export class SessionsPage implements OnInit {
     this.router.navigate(['/session-user/new-session'], params);
   }
 
-  cancelSession(){
-    this.conectionServices.deleteSession(this.session);
-    this.schedule1 = new Schedule();
-    this.schedule2 = new Schedule();
-    this.schedule3 = new Schedule();
-    this.schedule4 = new Schedule();
-  }
-
   doRefresh(event: any) {
     this.addSessions();
     event.target.complete();

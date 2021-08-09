@@ -13,10 +13,10 @@ import { UserFirebaseService } from '@social/services/user-firebase.service';
   styleUrls: ['./sessions-coach.page.scss'],
 })
 export class SessionsCoachPage implements OnInit {
-
-  sessions: any;
+  
+  sessions: Session[];
   schedules: Schedule[];
-  users: any;
+  users: User[];
 
   constructor(private router: Router,
     private conectionServices: ConectionService,
@@ -24,25 +24,19 @@ export class SessionsCoachPage implements OnInit {
     private userService: UserFirebaseService) { }
 
   ngOnInit() {
-    this.users = this.userService.getUsers();
-    this.sessions = this.conectionServices.getSessions();
-    this.loadSchedules();
-  }
-
-  loadSchedules(){
-    this.schedules = [];
-    if(this.sessions != null){
-      this.sessions.forEach((element: any) => {
-        element.forEach((session: any) => {
-          if(session.schedule != null){
-            session.schedule.forEach((e: any) => {
-              let schedule: Schedule = JSON.parse(e);
-              this.schedules.push(schedule);
-            });
-          }
+    this.conectionServices.getSessions().subscribe((s: Session[]) => {
+      this.sessions = s;
+      this.schedules = [];
+      this.sessions.forEach((session: Session) => {
+        this.userService.getUsers().subscribe((u: User[]) => {
+          this.users = u;
+        });
+        session.schedule.forEach((schedule: any) => {
+          let scdl: Schedule = JSON.parse(schedule);
+          this.schedules.push(scdl);
         });
       });
-    }
+    });
   }
 
   aceptSession(session: Session){
@@ -51,6 +45,9 @@ export class SessionsCoachPage implements OnInit {
       session.state = "Aceptado";
       console.log(session);
       this.conectionServices.saveSession(session);
+      this.sessions = [];
+      this.users = [];
+      this.schedules = [];
     });    
   }
 

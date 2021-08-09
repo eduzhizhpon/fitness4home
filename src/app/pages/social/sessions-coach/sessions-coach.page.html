@@ -14,10 +14,10 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngFor="let session of sessions | async">
+  <ion-list *ngFor="let session of sessions">
     <ion-item *ngIf="session.state == 'Pendiente'">
       <ion-label>
-        <div *ngFor="let user of users | async">
+        <div *ngFor="let user of users">
           <h3 *ngIf="session.uid == user.uid">{{user.name}}</h3>
         </div>
         <div *ngFor="let schedule of schedules">

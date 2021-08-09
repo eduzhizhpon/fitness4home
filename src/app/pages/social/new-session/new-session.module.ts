@@ -9,6 +9,7 @@ import { NewSessionPageRoutingModule } from './new-session-routing.module';
 import { NewSessionPage } from './new-session.page';
 
 import { CoreSharedModule } from '@shared/core-shared.module';
+import { ZoomSharedModule } from '@shared/modules/zoom-shared/zoom-shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CoreSharedModule } from '@shared/core-shared.module';
     FormsModule,
     IonicModule,
     NewSessionPageRoutingModule,
-    CoreSharedModule
+    CoreSharedModule,
+    ZoomSharedModule
   ],
   declarations: [NewSessionPage]
 })
