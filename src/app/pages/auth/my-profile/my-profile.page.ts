@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@auth-app/domain/user';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyProfilePage implements OnInit {
 
-  constructor() { }
+  currentUser: User = new User();
+
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.authService.getCurrentUser().then( (user) => {
+      this.currentUser = user;
+    }).catch( (reason) => {
+      console.log(reason);
+    });
   }
 
 }
