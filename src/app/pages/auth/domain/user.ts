@@ -15,4 +15,5 @@ export class User {
     zoomPasswordMeeting: string;
     enabled: boolean;
     tier: number;
+    nextBill: Date;
 }

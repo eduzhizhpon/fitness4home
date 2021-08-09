@@ -5,6 +5,7 @@ import { User } from '@auth-app/domain/user';
 import { AuthenticationService } from '@auth-app/services/authentication.service';
 import { ToastController } from '@ionic/angular';
 import { UserFirebaseService } from '@social/services/user-firebase.service';
+import { TierManageService } from '@subscription/services/tier-manage.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class SubscriptionPage implements OnInit {
   constructor(private authService: AuthenticationService,
     private ufs: UserFirebaseService,
     private toastController: ToastController,
-    private router: Router) {
+    private router: Router,
+    private tierManageService: TierManageService) {
     this.enableFeedback = false;
   }
 
@@ -33,8 +35,8 @@ export class SubscriptionPage implements OnInit {
 
   onSubscribe(): void {
     this.authService.getCurrentUser().then( (user: User) => {
-      console.log('OnSubscribe ' + user);
       user.tier =  +this.subscriptionTier;
+      user.nextBill = this.tierManageService.getNextBill(new Date(), user.tier);
       this.ufs.saveUser(user).then( (data) => {
         this.enableFeedback = true;
       });
