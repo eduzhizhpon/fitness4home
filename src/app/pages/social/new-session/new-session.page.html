@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
+  <ion-toolbar>
+    <ion-title *ngIf="schedule.id == null">
+      Sesión #{{number}}
+    </ion-title>
+    <ion-title *ngIf="schedule.id != null">
+      Sesión #{{schedule.id}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Nueva Sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngIf="schedule.id == null">
+    <ion-header style="text-align: center;">
+      <ion-label>
+        <h1>Solicitar Entrenamiento</h1>
+      </ion-label>
+    </ion-header>
+    <ion-item>
+      <ion-label>Seleccionar dia</ion-label>
+      <ion-select [(ngModel)]="schedule.day" okText="Aceptar" cancelText="Cancelar" placeholder="Seleccione uno">
+        <ion-select-option value="Lunes">Lunes</ion-select-option>
+        <ion-select-option value="Martes">Martes</ion-select-option>
+        <ion-select-option value="Miercoles">Miércoles</ion-select-option>
+        <ion-select-option value="Jueves">Jueves</ion-select-option>
+        <ion-select-option value="Viernes">Viernes</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+
+    <ion-item>
+      <ion-label>Hora inicio:</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeStart"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hora fin:</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="timeEnd"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sesión</ion-label>
+      <ion-select placeholder="Seleccione uno" [(ngModel)]="schedule.type">
+        <ion-select-option value="Online">Online</ion-select-option>
+        <ion-select-option value="Presencial">Presencial</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="schedule.id != null">
+      <ion-label>Estado: {{session.state}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div style="text-align: center;" *ngIf="schedule.id != null &&
+  schedule.type == 'Online'">
+    <h2>Reunión online</h2>
+    <ion-card>
+      <h3>Sesión por zoom</h3>
+      <p>Día: {{schedule.day}}</p>
+      <p>Hora de inicio: {{schedule.hour_start}}</p>
+      <p>Hora de Finalización: {{schedule.hour_end}}</p>
+      <div *ngIf="session.state == 'Aceptado'">
+        <app-zoom-meeting meetingType="user" [meetingNumber]="coach.zoomIdMeeting" [meetingPassword]="coach.zoomPasswordMeeting" [displayName]="login.name"></app-zoom-meeting>
+      </div>
+    </ion-card>
+  </div>
+
+  <div style="text-align: center;" *ngIf="schedule.id != null &&
+  schedule.type == 'Presencial'">
+    <h3>Sesión Presencial</h3>
+    <ion-card>
+      <ion-label>
+        <h1>Horario</h1>
+        <p>Día: {{schedule.day}}</p>
+        <p>Hora de inicio: {{schedule.hour_start}}</p>
+        <p>Hora de Finalización: {{schedule.hour_end}}</p>
+      </ion-label>
+    </ion-card>
+  </div>
+  
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="schedule.id == null">
+    <ion-fab-button (click)="saveSession()">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

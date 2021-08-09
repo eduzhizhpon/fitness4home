@@ -10,8 +10,13 @@ import { CompleteProfilePage } from './complete-profile.page';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { UploadImageComponent } from '../components/upload-image/upload-image.component';
+
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
+    CoreSharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -21,6 +26,6 @@ import { AgmCoreModule } from '@agm/core';
     })
 
   ],
-  declarations: [CompleteProfilePage]
+  declarations: [CompleteProfilePage, UploadImageComponent]
 })
 export class CompleteProfilePageModule {}

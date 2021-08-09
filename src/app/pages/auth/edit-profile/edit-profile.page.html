@@ -1,9 +1,93 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>edit-profile</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-header class="ion-text-center">
+      <ion-card-title>Editar mi perfil</ion-card-title>
+
+      <ion-grid class="ion-content-justify-center">
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-header class="ion-text-center">
+                <img class="avatar" [src]="currentUser.profilePhoto" >
+              </ion-card-header>
+
+              <ion-card-content>
+                <app-upload-image source="none" (imageSelected)="imageSelectedEvt($event)" 
+                  (uploadFinished)="uploadFinishedEvt($event)"></app-upload-image>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid class="ion-content-justify-center">
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input [(ngModel)]="currentUser.name" type="text" inputmode="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Apellido</ion-label>
+              <ion-input [(ngModel)]="currentUser.lastname" type="text" inputmode="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Id Zoom meeting</ion-label>
+              <ion-input [(ngModel)]="currentUser.zoomIdMeeting" type="text" inputmode="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Contraseña del Zoom Meeting</ion-label>
+              <ion-input [(ngModel)]="currentUser.zoomPasswordMeeting" type="password" inputmode="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Actualiza tu peso (kg)</ion-label>
+              <ion-input [(ngModel)]="currentUser.weight" type="number" inputmode="decimal" min="0"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Actualiza tu altura (cm)</ion-label>
+              <ion-input [(ngModel)]="currentUser.height" type="number" inputmode="decimal" min="0"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-text-center">
+          <ion-col>
+            <ion-button (click)="updateProfile()">
+              <ion-icon slot="start" name="save"></ion-icon>
+              Guardar Cambios
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

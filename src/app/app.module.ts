@@ -19,8 +19,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 import { Camera } from '@ionic-native/camera/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { Zoom } from '@ionic-native/zoom/ngx';
+
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,10 +36,14 @@ import { Zoom } from '@ionic-native/zoom/ngx';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCT9wzsIIAkW95uHWVvCbBEP-xtjNbJPow'
+    })
   ],
   providers: [
     Camera,
+    CallNumber,
     GooglePlus,
     Zoom,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

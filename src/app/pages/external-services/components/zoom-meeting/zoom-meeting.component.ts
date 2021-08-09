@@ -55,7 +55,7 @@ export class ZoomMeetingComponent implements OnInit {
     this.zoomService.login(this.userName, this.password)
       .then((success: any) => {
         this.isLogged = true;
-        this.showToast('Inicio de sesión en Zoom correcto' + JSON.stringify(success));
+        this.showToast('Inicio de sesión en Zoom correcto');
         console.log(success);
       })
       .catch((error: any) => {
@@ -74,7 +74,7 @@ export class ZoomMeetingComponent implements OnInit {
   startMeeting() {
     this.zoomService.startInstantMeeting(this.options)
       .then((success: any) => console.log('Start Zoom meeting', success))
-      .catch((error: any) => console.log(error));
+      .catch((error: any) => this.showToast('No se pudo iniciar la reunión. Verifique que sus datos sean correctos'))
   }
 
   joinMeeting() {

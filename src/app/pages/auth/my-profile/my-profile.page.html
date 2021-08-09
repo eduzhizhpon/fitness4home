@@ -1,9 +1,48 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>my-profile</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
+
+  <ion-card>
+    <ion-card-header class="ion-text-center">
+      <img class="avatar" [src]="currentUser.profilePhoto" alt="Imagen de perfil" >
+      <ion-card-title> {{ currentUser.lastname }}, {{ currentUser.name }} </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-grid class="ion-text-center">
+        <ion-row>
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-label><h2>Mi peso</h2></ion-label>
+                <ion-label><h1>{{ currentUser.weight }} kg</h1></ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+          <ion-col>
+            <ion-card>
+              <ion-card-content>
+                <ion-label><h2>Mi altura</h2></ion-label>
+                <ion-label><h1>{{ currentUser.height }} cm</h1></ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row>
+          <ion-col>
+            <ion-button>Ver mis Estados</ion-button>
+          </ion-col>
+        </ion-row> -->
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

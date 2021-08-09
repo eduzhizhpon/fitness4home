@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <app-name-icon></app-name-icon>
+  <ion-toolbar>
+    <ion-title> Sesiones de Entrenamiento </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Sesiones de Entrenamiento</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngFor="let ns of [1,2,3,4]">
+    <ion-list>
+      <ion-item *ngIf="schedule1.id != null && ns == 1" (click)="loadSession(ns, session)">
+        <ion-label>
+          <h2>Sesión #{{ns}}</h2>
+          <h3>Dia: {{schedule1.day}}, Inicia: {{schedule1.hour_start}} Finaliza: {{schedule1.hour_end}}</h3>
+          <p>Estado: {{session.state}}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="schedule1.type == 'Online' ?'primary':'tertiary'">{{schedule1.type}}</ion-badge>
+      </ion-item>
+
+      <ion-item *ngIf="schedule2.id != null && ns == 2" (click)="loadSession(ns, session)">
+        <ion-label>
+          <h2>Sesión #{{ns}}</h2>
+          <h3>Dia: {{schedule2.day}}, Inicia: {{schedule2.hour_start}} Finaliza: {{schedule2.hour_end}}</h3>
+          <p>Estado: {{session.state}}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="schedule2.type == 'Online' ?'primary':'tertiary'">{{schedule2.type}}</ion-badge>
+      </ion-item>
+
+      <ion-item *ngIf="schedule3.id != null && ns == 3" (click)="loadSession(ns, session)">
+        <ion-label>
+          <h2>Sesión #{{ns}}</h2>
+          <h3>Dia: {{schedule3.day}}, Inicia: {{schedule3.hour_start}} Finaliza: {{schedule3.hour_end}}</h3>
+          <p>Estado: {{session.state}}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="schedule3.type == 'Online' ?'primary':'tertiary'">{{schedule3.type}}</ion-badge>
+      </ion-item>
+
+      <ion-item *ngIf="schedule4.id != null && ns == 4" (click)="loadSession(ns, session)">
+        <ion-label>
+          <h2>Sesión #{{ns}}</h2>
+          <h3>Dia: {{schedule4.day}}, Inicia: {{schedule4.hour_start}} Finaliza: {{schedule4.hour_end}}</h3>
+          <p>Estado: {{session.state}}</p>
+        </ion-label>
+        <ion-badge slot="end" [color]="schedule4.type == 'Online' ?'primary':'tertiary'">{{schedule4.type}}</ion-badge>
+      </ion-item>
+      <ion-item *ngIf="schedule1.id == null && ns == 1 || 
+      schedule2.id == null && ns == 2 || schedule3.id == null && ns == 3 || 
+      schedule4.id == null && ns == 4" (click)="newSession(ns)">
+        <ion-label>
+          <h2>Sesión #{{ns}}</h2>
+          <h3>Seleccione un horario</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  
+</ion-content>
