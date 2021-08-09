@@ -1,6 +1,6 @@
 export class State {
-    // uid: string
     id: string
+    uid: string
     title: string
     description: string
     image: any

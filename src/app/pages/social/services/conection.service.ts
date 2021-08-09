@@ -19,7 +19,7 @@ export class ConectionService {
       const refState = this.afs.collection("states");
       if(state.id == null){
         state.id = this.afs.createId();
-        state.uname = user.name;
+        state.uid = user.uid;
         state.active = true
       }
       refState.doc(state.id).set(Object.assign({}, state))
@@ -52,5 +52,9 @@ export class ConectionService {
   deleteSession(session: Session){
     const refSession = this.afs.collection("sessions");
     refSession.doc(session.id).delete();
+  }
+
+  getUsers(): Observable<any[]>{
+    return this.afs.collection("users").valueChanges();
   }
 }

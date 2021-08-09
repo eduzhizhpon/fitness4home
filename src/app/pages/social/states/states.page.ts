@@ -10,11 +10,13 @@ import { ConectionService } from '@social/services/conection.service';
 export class StatesPage implements OnInit {
 
   states: any;
+  users: any;
 
   constructor(private router: Router,
     private conectionServices: ConectionService) { }
 
   ngOnInit() {
+    this.users = this.conectionServices.getUsers();
     this.states = this.conectionServices.getStates();
   }
 
