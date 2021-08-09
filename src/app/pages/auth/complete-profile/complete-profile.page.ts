@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 
 import { LocationService } from '../services/location.service';
 import { AuthenticationService } from '@auth-app/services/authentication.service';
+import { UserFirebaseService } from '@social/services/user-firebase.service';
 
 @Component({
   selector: 'app-complete-profile',
@@ -36,6 +37,7 @@ export class CompleteProfilePage implements OnInit {
 
   constructor(private locationService: LocationService,
     private authService: AuthenticationService,
+    private ufb: UserFirebaseService,
 
     private router: Router, private route: ActivatedRoute,
     private toastController: ToastController) {
@@ -97,7 +99,13 @@ export class CompleteProfilePage implements OnInit {
         this.user.enabled = true;
         this.user.tier = 0;
         this.authService.updateUserData(this.user, this.provider).then( (data) => {
-          this.router.navigate(['subscription']);
+          if (user) {
+            if (user.userType === 'user') {
+              this.router.navigate(['subscription']);
+            } else if (user.userType === 'coach-tmp') {
+              this.router.navigate(['home']);
+            }
+          }
         }).catch( (reason) => {
           console.log(reason);
           const msg = 'Ha ocurrido un error al completar el perfil';
@@ -119,25 +127,40 @@ export class CompleteProfilePage implements OnInit {
   }
 
   continueWithGoogle() {
-    this.authService.getCurrentUser().then( (user: User) => {
-      this.user.email = user.email;
-      this.user.uid = user.uid;
-      this.user.enabled = true;
-      this.authService.updateUserData(this.user, this.provider).then( (data) => {
-        this.router.navigate(['subscription']);
-      }).catch( (reason) => {
-        console.log(reason);
-        const msg = 'Ha ocurrido un error al actualizar el perfil con Google';
-        const colorCode = 'danger';
-        this.showToast(msg, colorCode, 3500);
-      });
 
+    this.ufb.saveUser(this.user).then( () => {
+      this.authService.getCurrentUser().then( (user) => {
+        if (user) {
+          if (user.userType === 'user') {
+            this.router.navigate(['subscription']);
+          } else if (user.userType === 'coach-tmp') {
+            this.router.navigate(['home']);
+          }
+        }
+      })
+      
     }).catch( (reason) => {
       console.log(reason);
-      const msg = 'Ha ocurrido un error al completar el perfil con Google';
+      const msg = 'Ha ocurrido un error al actualizar el perfil con Google';
       const colorCode = 'danger';
       this.showToast(msg, colorCode, 3500);
     });
+    
+    // this.authService.getCurrentUser().then( (user: User) => {
+    //   console.log('ASDASDASDASD:', user);
+    //   this.user.email = user.email;
+    //   this.user.uid = user.uid;
+    //   this.user.enabled = true;
+    //   this.authService.updateUserData(this.user, this.provider).then( (data) => {
+        
+    //   })
+
+    // }).catch( (reason) => {
+    //   console.log(reason);
+    //   const msg = 'Ha ocurrido un error al completar el perfil con Google';
+    //   const colorCode = 'danger';
+    //   this.showToast(msg, colorCode, 3500);
+    // });
   }
 
   showToast(msg: string, colorCode: string, durationMsg: number = 2000) {

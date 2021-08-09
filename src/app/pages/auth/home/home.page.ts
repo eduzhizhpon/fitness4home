@@ -14,7 +14,9 @@ import { TierManageService } from '@subscription/services/tier-manage.service';
 export class HomePage implements OnInit {
 
   isUser: boolean;
+  isCoach: boolean;
   isAdmin: boolean;
+  isCoachTmp: boolean;
 
   loaded: boolean;
 
@@ -26,34 +28,63 @@ export class HomePage implements OnInit {
     this.loaded = false;
     this.authService.getCurrentUser().then( (user: any) => {
       if (user) {
-        if (user.userType === 'admin') {
-          this.isAdmin = true;
-        } else if (user.userType === 'user') {
-          if (tierManageService.validBill(user.nextBill.toDate())) {
+        switch (user.userType) {
+          case 'admin':
+            this.isAdmin = true;
+            this.isUser = false;
+            this.isCoach = false;
+            this.isCoachTmp = false;
+            break;
+          case 'user':
             this.isAdmin = false;
             this.isUser = true;
-          } else if (user.tier > 0) {
-            this.isUser = true;
-            user.nextBill = this.tierManageService.getNextBill(new Date(), user.tier);
-            this.ufb.saveUser(user);
-          } else {
-            this.authService.logout().then( () => {
-              this.router.navigate(['/auth/login']);
-            })
-          }
-          
-        } else if (user.userType === 'coach') {
-          this.isAdmin = false;
-          this.isUser = false;
+            this.isCoach = false;
+            this.isCoachTmp = false;
+            break;
+          case 'coach':
+            this.isAdmin = false;
+            this.isUser = false;
+            this.isCoach = true;
+            this.isCoachTmp = false;
+            break;
+          case 'coach-tmp':
+            this.isAdmin = false;
+            this.isUser = false;
+            this.isCoach = false;
+            this.isCoachTmp = true;
+            break;
+          default:
+            this.logout();
         }
       } else {
-        this.router.navigate(['/auth/login']);
+        this.logout();
       }
       this.loaded = true;
     }); 
   }
 
   ngOnInit() {
+  }
+
+  logout(): void{
+    this.authService.logout().then( () => {
+      this.router.navigate(['/auth/login']);
+    });
+  }
+
+  validUserTier(user: any): void {
+    if (this.tierManageService.validBill(user.nextBill.toDate())) {
+      this.isAdmin = false;
+      this.isUser = true;
+    } else if (user.tier > 0) {
+      this.isUser = true;
+      user.nextBill = this.tierManageService.getNextBill(new Date(), user.tier);
+      this.ufb.saveUser(user);
+    } else {
+      this.authService.logout().then( () => {
+        this.router.navigate(['/auth/login']);
+      })
+    }
   }
 
   async presentLoading() {

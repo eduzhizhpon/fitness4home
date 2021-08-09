@@ -23,7 +23,7 @@
 </ion-content>
 
 <ion-footer *ngIf="loaded">
-  <ion-grid *ngIf="!isAdmin">
+  <ion-grid *ngIf="!isAdmin && !isCoachTmp">
     <ion-row class="ion-align-items-center ion-text-center">
       <ion-col class="ion-margin-top">
         <ion-button expand="block" *ngIf="isUser" (click)="onUserTrainSession()">
@@ -31,7 +31,7 @@
           Definir sesiones de entrenamiento
         </ion-button>
 
-        <ion-button expand="block" *ngIf="!isUser" (click)="onCoachTrainSession()">
+        <ion-button expand="block" *ngIf="isCoach" (click)="onCoachTrainSession()">
           <ion-icon slot="start" name="trophy"></ion-icon>
           Explorar sesiones de entrenamiento
         </ion-button>
@@ -63,4 +63,19 @@
         </ion-col>
       </ion-row>
   </ion-grid>
+
+  <ion-grid *ngIf="isCoachTmp">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Registro en proceso...</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Su registro está siendo procesado, espere que uno de los encargados se comunique con ud.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+</ion-grid>
 </ion-footer>

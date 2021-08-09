@@ -34,8 +34,18 @@ export class LoginPage implements OnInit {
   }
 
   loginWithGoogle() {
-    this.authService.googleLogin().then( (data) => {
-      this.router.navigate(['/home']);
+    this.authService.googleLogin().then( (userGoogle) => {
+      console.log('USERGOOGE', userGoogle)
+      this.authService.getCurrentUser().then( (user: User) => {
+        if (user) {
+          this.router.navigate(['/home']);
+        } else {
+          this.showToast("Regístrese para acceder al sistema", "primary");
+          this.router.navigate(['/auth/register']);
+          
+        }
+      });
+      
     }).catch( (reason) => {
       console.log(reason);
       const msg = 'Ha ocurrido un error al iniciar sesión';

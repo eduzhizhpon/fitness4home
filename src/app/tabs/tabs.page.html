@@ -1,8 +1,8 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" *ngIf="!isAdmin && !loading">
 
-    <ion-tab-button tab="subscription-update">
+    <ion-tab-button tab="subscription-update" *ngIf="isUser">
       <ion-icon name="diamond"></ion-icon>
       <ion-label>Subscripción</ion-label>
     </ion-tab-button>
@@ -12,14 +12,14 @@
       <ion-label>Sesiones</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="session-coach" *ngIf="!isUser">
-      <ion-icon name="calendar"></ion-icon>
-      <ion-label>Sesiones</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="home">
+    <ion-tab-button tab="home" selected>
       <ion-icon name="home"></ion-icon>
       <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="session-coach" *ngIf="isCoach">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Sesiones</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="music">
