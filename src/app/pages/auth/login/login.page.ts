@@ -22,9 +22,18 @@ export class LoginPage implements OnInit {
   }
 
   loginWithEmail() {
-    // console.log('Email: ' + this.user.email + ' Pass: ' + this.password);
     this.authService.emailPasswordLogin(this.user.email, this.password).then( (data) => {
-        this.router.navigate(['/home']);
+      this.authService.getCurrentUser().then( (user: any) => {
+        if (user?.enabled) {
+          this.router.navigate(['/home']);
+        } else if (!user?.enabled) {
+          this.authService.logout().then( () => {
+            this.router.navigate(['/auth/login']);
+            this.showToast('Su cuenta está inhabilitada. Comuníquese con soporte', 
+              'danger');
+          });
+        }
+      });
     }).catch( (reason) => {
       console.log(reason);
       const msg = 'Email o contraseña incorrectos';
@@ -35,10 +44,17 @@ export class LoginPage implements OnInit {
 
   loginWithGoogle() {
     this.authService.googleLogin().then( (userGoogle) => {
-      console.log('USERGOOGE', userGoogle)
       this.authService.getCurrentUser().then( (user: User) => {
         if (user) {
-          this.router.navigate(['/home']);
+          if (user.enabled) {
+            this.router.navigate(['/home']);
+          } else if (!user.enabled) {
+            this.authService.logout().then( () => {
+            this.router.navigate(['/auth/login']);
+            this.showToast('Su cuenta está inhabilitada. Comuníquese con soporte', 
+              'danger');
+          });
+          }
         } else {
           this.showToast("Regístrese para acceder al sistema", "primary");
           this.router.navigate(['/auth/register']);
@@ -57,7 +73,7 @@ export class LoginPage implements OnInit {
   showToast(msg: string, colorCode: string) {
     this.toastController.create({
       message: msg,
-      duration: 2000,
+      duration: 4000,
       color: colorCode
     }).then(toast => toast.present());
   }
