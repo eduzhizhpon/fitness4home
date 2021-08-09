@@ -92,8 +92,9 @@ export class CompleteProfilePage implements OnInit {
   }
 
   continueWithEmail() {
-    this.authService.emailPasswordLogin(this.user.email, this.password).then( (log) => {
-      this.authService.getCurrentUser().then( (user: User) => {
+    console.log(this.user.email, '|' + this.password)
+    this.authService.emailPasswordLogin(this.user.email, this.password).then( (user) => {
+        console.log(user);
         this.user.uid = user.uid;
         this.user.enabled = true;
         this.user.tier = 0;
@@ -103,12 +104,6 @@ export class CompleteProfilePage implements OnInit {
           } else if (this.user.userType === 'coach-tmp') {
             this.router.navigate(['/home']);
           }
-        }).catch( (reason) => {
-          console.log(reason);
-          const msg = 'Ha ocurrido un error al completar el perfil';
-          const colorCode = 'danger';
-          this.showToast(msg, colorCode, 3500);
-        });
       }).catch( (reason) => {
         console.log(reason);
         const msg = 'No se ha podido obtener el usuario';
