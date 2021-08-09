@@ -108,12 +108,12 @@ export class AuthenticationService {
   }
 
   /***** LOGIN WITH EMAIL */
-  async emailPasswordLogin(email: string, password: string): Promise<void> {
+  async emailPasswordLogin(email: string, password: string): Promise<any> {
     try {
       const emailCredential = firebase.default.auth.EmailAuthProvider.credential(email, password);
       const firebaseUser = await firebase.default.auth().signInWithCredential(emailCredential);
       // console.log('Usuario de Firebase ' + JSON.stringify(firebaseUser.user));
-      return await this.updateUserData(firebaseUser.user, 'email');
+      return firebaseUser.user;
     } catch (error) {
       // console.log(error);
       throw error;
