@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '@auth-app/domain/user';
 import { Schedule } from '@social/domain/schedule';
 import { Session } from '@social/domain/session';
+import { UserFirebaseService } from '@social/services/user-firebase.service';
 
 @Component({
   selector: 'app-start-session-coach',
@@ -10,13 +12,16 @@ import { Session } from '@social/domain/session';
 })
 export class StartSessionCoachPage implements OnInit {
 
+  user = new User();
   session = new Session();
   schedules: Schedule[];
 
   constructor(private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private userService: UserFirebaseService) {
       route.queryParams.subscribe(params =>{
         this.session = this.router.getCurrentNavigation().extras.queryParams.session;
+        userService.readUser(this.session.uid).subscribe((user: User) => this.user = user);
         if(this.session.schedule != null){
           this.schedules = [];
           this.session.schedule.forEach(e => {

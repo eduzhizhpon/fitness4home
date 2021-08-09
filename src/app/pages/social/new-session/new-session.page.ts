@@ -55,7 +55,7 @@ export class NewSessionPage implements OnInit {
       }
       this.session.schedule.push(JSON.stringify(this.schedule));
       this.conectionService.saveSession(this.session);
-      this.router.navigate(['/tabs/tab2']);
+      this.router.navigate(['session-user']);
     }
   }
 

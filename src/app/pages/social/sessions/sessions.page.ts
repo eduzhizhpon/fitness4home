@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { User } from '@auth-app/domain/user';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
 import { Schedule } from '@social/domain/schedule';
 import { Session } from '@social/domain/session';
 import { ConectionService } from '@social/services/conection.service';
@@ -11,6 +13,7 @@ import { ConectionService } from '@social/services/conection.service';
 })
 export class SessionsPage implements OnInit {
 
+  user = new User();
   sessions: any;
   session = new Session();
   schedule1 = new Schedule();
@@ -19,11 +22,15 @@ export class SessionsPage implements OnInit {
   schedule4 = new Schedule();
 
   constructor(private router: Router,
-    private conectionServices: ConectionService) { 
+    private conectionServices: ConectionService,
+    private authService: AuthenticationService) { 
   }
 
   ngOnInit() {
-    // this.user = this.conectionServices.getUser();
+    this.authService.getCurrentUser().then( (user: User) => {
+      this.user = user;
+    });
+    
     this.addSessions();
   }
 
@@ -31,7 +38,8 @@ export class SessionsPage implements OnInit {
     this.sessions = this.conectionServices.getSessions();
     this.sessions.forEach((element: any[]) => {
       element.forEach(e => {
-        if(e.uid == "1"){//get user id
+        // if(e.uid == this.user.uid){
+        if(e.uid == "KV8Oo7PylzZkK3WeqZUE9I7CC3A2"){//get user id
           this.session = e;
           if(this.session.schedule != null){
             this.session.schedule.forEach(e => {

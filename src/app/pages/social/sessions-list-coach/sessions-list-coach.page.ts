@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { User } from '@auth-app/domain/user';
+import { AuthenticationService } from '@auth-app/services/authentication.service';
 import { Schedule } from '@social/domain/schedule';
 import { Session } from '@social/domain/session';
 import { ConectionService } from '@social/services/conection.service';
+import { UserFirebaseService } from '@social/services/user-firebase.service';
 
 @Component({
   selector: 'app-sessions-list-coach',
@@ -11,15 +14,24 @@ import { ConectionService } from '@social/services/conection.service';
 })
 export class SessionsListCoachPage implements OnInit {
 
+  coach = new User();
   sessions: any;
   schedules: Schedule[];
   coachId: string;
+  users: any;
 
   constructor(private router: Router,
-    private conectionServices: ConectionService) { }
+    private conectionServices: ConectionService,
+    private authService: AuthenticationService,
+    private userService: UserFirebaseService) { }
 
   ngOnInit() {
-    this.coachId = "coach1"//get user id -coach
+    this.authService.getCurrentUser().then( (user: User) => {
+      this.coach = user;
+    });
+    // this.coachId = this.coach.uid;
+    this.coachId = "O5MfrLbxljzGNPhx2Tia"//get user id -coach
+    this.users = this.userService.getUsers();
     this.sessions = this.conectionServices.getSessions();
     this.loadSchedules();
   }

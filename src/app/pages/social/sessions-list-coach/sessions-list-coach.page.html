@@ -18,7 +18,9 @@
     <ion-item (click)="startSession(session)"
     *ngIf="session.cid == coachId && session.state == 'Aceptado'">
       <ion-label>
-        <h3>User</h3>
+        <div *ngFor="let user of users | async">
+          <h3 *ngIf="session.uid == user.uid">{{user.name}}</h3>
+        </div>
         <div *ngFor="let schedule of schedules">
           <p *ngIf="schedule.sid == session.id">{{schedule.day}}, {{schedule.hour_start}} - {{schedule.hour_end}} {{schedule.type}}</p>
         </div>

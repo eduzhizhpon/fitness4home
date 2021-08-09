@@ -13,7 +13,7 @@ export class UserFirebaseService {
   private collectionName: string = 'users';
 
   constructor(private afs: AngularFirestore) {
-
+    this.userCollection = this.afs.collection<User>(this.collectionName);
   }
 
   getUsers(type: string = 'user'): Observable<User[]> {
@@ -26,7 +26,7 @@ export class UserFirebaseService {
     const refUsers = this.afs.collection(this.collectionName);
     if (user.uid === null || user.uid === undefined) {
       user.uid = this.afs.createId();
-      // user.enabled = true;
+      user.enabled = true;
     }
 
     return refUsers.doc(user.uid).set(Object.assign({}, user));
@@ -43,7 +43,7 @@ export class UserFirebaseService {
   }
 
   deleteUser(user: User): Promise<void> {
-    // user.enable = false;
+    user.enabled = false;
     return this.saveUser(user);
   }
 }
