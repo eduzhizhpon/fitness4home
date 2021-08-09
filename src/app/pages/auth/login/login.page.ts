@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '@auth-app/domain/user';
 import { AuthenticationService } from '@auth-app/services/authentication.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
+import { RecoverPasswordPage } from '@auth-app/modals/recover-password/recover-password.page';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
 
   constructor(private authService: AuthenticationService,
     private toastController: ToastController,
+    private modalController: ModalController,
     private router: Router) { }
 
   ngOnInit() {
@@ -50,6 +52,25 @@ export class LoginPage implements OnInit {
       duration: 2000,
       color: colorCode
     }).then(toast => toast.present());
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: RecoverPasswordPage,
+      // componentProps: {
+      //   "paramID": 123,
+      //   "paramTitle": "Test Title"
+      // }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        // this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
   }
 
 }
