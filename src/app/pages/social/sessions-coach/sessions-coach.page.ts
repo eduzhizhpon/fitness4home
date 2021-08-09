@@ -14,7 +14,6 @@ import { UserFirebaseService } from '@social/services/user-firebase.service';
 })
 export class SessionsCoachPage implements OnInit {
 
-  coach = new User();
   sessions: any;
   schedules: Schedule[];
   users: any;
@@ -25,9 +24,6 @@ export class SessionsCoachPage implements OnInit {
     private userService: UserFirebaseService) { }
 
   ngOnInit() {
-    this.authService.getCurrentUser().then( (user: User) => {
-      this.coach = user;
-    });
     this.users = this.userService.getUsers();
     this.sessions = this.conectionServices.getSessions();
     this.loadSchedules();
@@ -50,11 +46,12 @@ export class SessionsCoachPage implements OnInit {
   }
 
   aceptSession(session: Session){
-    // session.cid = this.coach.uid;
-    session.cid = "O5MfrLbxljzGNPhx2Tia"//get user id -coach
-    session.state = "Aceptado"
-    console.log(session);
-    this.conectionServices.saveSession(session);
+    this.authService.getCurrentUser().then( (user: User) => {
+      session.cid = user.uid;
+      session.state = "Aceptado";
+      console.log(session);
+      this.conectionServices.saveSession(session);
+    });    
   }
 
 }

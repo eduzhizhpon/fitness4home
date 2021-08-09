@@ -11,18 +11,19 @@ import { User } from '@auth-app/domain/user';
 })
 export class ConectionService {
 
-  user = new User();
-
   constructor(public afs: AngularFirestore,
     private authService: AuthenticationService) { }
 
   saveState(state: State){
-    const refState = this.afs.collection("states");
-    if(state.id == null){
-      state.id = this.afs.createId();
-      state.active = true
-    }
-    refState.doc(state.id).set(Object.assign({}, state))
+    this.authService.getCurrentUser().then( (user: User) => {
+      const refState = this.afs.collection("states");
+      if(state.id == null){
+        state.id = this.afs.createId();
+        state.uname = user.name;
+        state.active = true
+      }
+      refState.doc(state.id).set(Object.assign({}, state))
+    });
   }
 
   getStates(): Observable<any[]>{
@@ -32,17 +33,15 @@ export class ConectionService {
 
   saveSession(session: Session){
     this.authService.getCurrentUser().then( (user: User) => {
-      this.user = user;
+      const refSession = this.afs.collection("sessions");
+      if(session.id == null){
+        session.id = this.afs.createId();
+        session.uid = user.uid;
+        session.state = "Pendiente";
+        session.active = true;
+      }
+      refSession.doc(session.id).set(Object.assign({}, session));
     });
-    const refSession = this.afs.collection("sessions");
-    if(session.id == null){
-      session.id = this.afs.createId();
-      // session.uid = this.user.uid
-      session.uid = "KV8Oo7PylzZkK3WeqZUE9I7CC3A2" // get user id
-      session.state = "Pendiente";
-      session.active = true
-    }
-    refSession.doc(session.id).set(Object.assign({}, session))
   }
 
   getSessions(): Observable<any[]>{

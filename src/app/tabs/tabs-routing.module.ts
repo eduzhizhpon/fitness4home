@@ -78,7 +78,7 @@ const routes: Routes = [
 
 
       {
-        path: 'session-user/new-sesion',
+        path: 'session-user/new-session',
         loadChildren: () => import('@social/new-session/new-session.module').then(m => m.NewSessionPageModule)
       },
       {

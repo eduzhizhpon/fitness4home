@@ -29,34 +29,34 @@ export class SessionsPage implements OnInit {
   ngOnInit() {
     this.authService.getCurrentUser().then( (user: User) => {
       this.user = user;
+      this.addSessions();
     });
-    
-    this.addSessions();
   }
 
   addSessions(){
     this.sessions = this.conectionServices.getSessions();
     this.sessions.forEach((element: any[]) => {
-      element.forEach(e => {
-        // if(e.uid == this.user.uid){
-        if(e.uid == "KV8Oo7PylzZkK3WeqZUE9I7CC3A2"){//get user id
-          this.session = e;
-          if(this.session.schedule != null){
-            this.session.schedule.forEach(e => {
-              let schedule: Schedule = JSON.parse(e);
-              if(schedule.id == "1"){
-                this.schedule1 = schedule;
-              }else if(schedule.id == "2"){
-                this.schedule2 = schedule;
-              }else if(schedule.id == "3"){
-                this.schedule3 = schedule;
-              }else if(schedule.id == "4"){
-                this.schedule4 = schedule;
-              }
-            });
+      if(element.length > 0){
+        element.forEach(e => {
+          if(e.uid == this.user.uid){
+            this.session = e;
+            if(this.session.schedule != null){
+              this.session.schedule.forEach(e => {
+                let schedule: Schedule = JSON.parse(e);
+                if(schedule.id == "1"){
+                  this.schedule1 = schedule;
+                }else if(schedule.id == "2"){
+                  this.schedule2 = schedule;
+                }else if(schedule.id == "3"){
+                  this.schedule3 = schedule;
+                }else if(schedule.id == "4"){
+                  this.schedule4 = schedule;
+                }
+              });
+            }
           }
-        }
-      });
+        });
+      }
       if(this.session.id == null){
         this.conectionServices.saveSession(this.session);
       }

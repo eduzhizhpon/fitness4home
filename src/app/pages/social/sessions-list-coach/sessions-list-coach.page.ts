@@ -14,10 +14,9 @@ import { UserFirebaseService } from '@social/services/user-firebase.service';
 })
 export class SessionsListCoachPage implements OnInit {
 
-  coach = new User();
   sessions: any;
   schedules: Schedule[];
-  coachId: string;
+  coach = new User();
   users: any;
 
   constructor(private router: Router,
@@ -28,12 +27,10 @@ export class SessionsListCoachPage implements OnInit {
   ngOnInit() {
     this.authService.getCurrentUser().then( (user: User) => {
       this.coach = user;
-    });
-    // this.coachId = this.coach.uid;
-    this.coachId = "O5MfrLbxljzGNPhx2Tia"//get user id -coach
+    });   
     this.users = this.userService.getUsers();
     this.sessions = this.conectionServices.getSessions();
-    this.loadSchedules();
+    this.loadSchedules(); 
   }
 
   loadSchedules(){
