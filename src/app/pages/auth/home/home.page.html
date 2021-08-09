@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
   <app-name-icon></app-name-icon>
+  <div class="ion-text-center" *ngIf="!loaded">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="loaded">
   <div class="home-center-content">
     <ion-grid>
       <ion-row>
@@ -19,7 +22,7 @@
   </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="loaded">
   <ion-grid *ngIf="!isAdmin">
     <ion-row class="ion-align-items-center ion-text-center">
       <ion-col class="ion-margin-top">

@@ -26,9 +26,14 @@ export class UpdateSubscriptionPage implements OnInit {
   }
 
   async ngOnInit() {
-    await this.authService.getCurrentUser().then( (user: User) => {
+    await this.authService.getCurrentUser().then( (user: any) => {
       this.currentSubscriptionTier = user.tier + "";
       this.subscriptionTier = this.currentSubscriptionTier;
+      if (user.tier === 0 && user.enabled === true) {
+        this.router.navigate(['subscription-update/cancel']);
+      } else if (user.enabled === false) {
+        this.router.navigate(['/auth/login']);
+      }
     }).catch( () => {
       this.router.navigate(['/auth/login']);
     });

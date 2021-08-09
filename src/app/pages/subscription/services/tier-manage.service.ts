@@ -9,7 +9,7 @@ export class TierManageService {
 
   validBill(nextBill: Date): boolean {
     let currentDate: Date = new Date();
-    if (nextBill >= currentDate) {
+    if (nextBill.valueOf() >= currentDate.valueOf()) {
       return true;
     }
     return false;

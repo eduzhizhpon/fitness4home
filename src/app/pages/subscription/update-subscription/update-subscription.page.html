@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <app-name-icon></app-name-icon>
   <ion-toolbar>
-    <ion-title> Subscripción </ion-title>
+    <ion-title> Subscripción</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid>
+  <ion-grid *ngIf="currentSubscriptionTier !== '0'">
     <ion-row>
       <ion-col>
         <app-subscription-options [subscriptionTier]="currentSubscriptionTier"
@@ -39,9 +39,22 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-grid *ngIf="currentSubscriptionTier === '0'">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-text>Subscripción Cancelada</ion-text>
+        <br/>
+        <br/>
+        <ion-button expand="block" fill="outline" color="primary" routerLink="cancel">
+          <ion-icon slot="start" name="heart-dislike-outline"></ion-icon> Ver fecha Límite
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="currentSubscriptionTier !== '0'">
   <ion-grid>
     <ion-row *ngIf="!enableFeedback">
       <ion-col>
@@ -54,8 +67,8 @@
     <ion-row *ngIf="!enableFeedback">
       <ion-col>
         <ion-button expand="block" fill="outline" color="danger" (click)="onCancelSubscribe()">
-            <ion-icon slot="start" name="heart-dislike-outline"></ion-icon> Cancelar Subscripción
-          </ion-button>
+          <ion-icon slot="start" name="heart-dislike-outline"></ion-icon> Cancelar Subscripción
+        </ion-button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="enableFeedback">
