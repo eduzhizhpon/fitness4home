@@ -65,6 +65,7 @@ export class RegisterPage implements OnInit {
         this.user.email = userGoogle.email;
         this.user.enabled = true;
         this.user.tier = 0;
+        this.user.profilePhoto = './assets/icon/user.png';
         const params: NavigationExtras = {
           queryParams: {
             user: this.user,

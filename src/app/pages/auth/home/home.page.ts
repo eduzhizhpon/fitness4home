@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     
     this.loaded = false;
     this.authService.getCurrentUser().then( (user: any) => {
-      if (user) {
+      if (user && user?.enabled) {
         switch (user.userType) {
           case 'admin':
             this.isAdmin = true;
@@ -87,33 +87,20 @@ export class HomePage implements OnInit {
     }
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-      duration: 2000
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
-  }
-
-
   onCoachTrainSession() {
-    console.log('Coach Train Session');
+    this.router.navigate(['/home/session-pending']);
   }
 
   onUserTrainSession() {
-    console.log('User Train Session');
+    this.router.navigate(['/session-user']);
   }
 
   onPublicStatus() {
-    console.log('Public Status');
+    this.router.navigate(['/home/states']);
   }
 
   onMyProfile() {
-    console.log('My Profile');
+    this.router.navigate(['/home/my-profile']);
   }
 
 }
