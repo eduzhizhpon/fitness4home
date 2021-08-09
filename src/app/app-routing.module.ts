@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'subscription',
     loadChildren: () => import('@subscription/subscription/subscription.module').then( m => m.SubscriptionPageModule)
   },
+  {
+    path: 'admin/coach',
+    loadChildren: () => import('./pages/social/admin-coach/admin-coach.module').then( m => m.AdminCoachPageModule)
+  },
 ];
 @NgModule({
   imports: [

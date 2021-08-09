@@ -112,6 +112,7 @@ export class AuthenticationService {
       const firebaseUser = await firebase.default.auth().signInWithCredential(emailCredential);
       return await this.updateUserData(firebaseUser.user, 'email');
     } catch (error) {
+      console.log(error);
       return error;
     }
   }
@@ -192,11 +193,11 @@ export class AuthenticationService {
 
     const userRef = this.afs.collection<any>('users');
 
-    if (data.uid == null || data.uid == undefined){
-      data.uid = this.afs.createId();
-    }
+    // if (data.uid == null || data.uid == undefined){
+    //   data.uid = this.afs.createId();
+    // }
 
-    console.log('data despues: ', JSON.stringify(data));
+    // console.log('data despues: ', JSON.stringify(data));
 
     return userRef.doc(`${data.uid}`).set(data, { merge: true});
   }

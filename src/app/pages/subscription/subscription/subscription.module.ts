@@ -9,8 +9,11 @@ import { SubscriptionPageRoutingModule } from './subscription-routing.module';
 import { SubscriptionPage } from './subscription.page';
 import { SharedModule } from '../shared/shared.module';
 
+import { CoreSharedModule } from '@shared/core-shared.module';
+
 @NgModule({
   imports: [
+    CoreSharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
