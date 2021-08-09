@@ -61,6 +61,7 @@ export class RegisterPage implements OnInit {
   registerUserGoogle(){
     if (this.user.userType != null) {
       this.authService.googleLogin().then( (userGoogle) => {
+        this.showToast(JSON.stringify(userGoogle), 'primary');
         this.user.uid = userGoogle.uid;
         this.user.email = userGoogle.email;
         this.user.enabled = true;

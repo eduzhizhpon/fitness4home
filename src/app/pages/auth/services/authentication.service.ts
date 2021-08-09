@@ -79,14 +79,15 @@ export class AuthenticationService {
 
   async nativeGoogleLogin(): Promise<any>  {
     try {
+      console.log('ENTRA A LOGIN CON GOOGLE');
       const gplusUser: any = await this.googlePlus.login({
         webClientId: environment.googleWebClientId,
         offline: true
       });
-
+      console.log('----------------------------', 'ENREAADSASDASD');
       const googleCredential = firebase.default.auth.GoogleAuthProvider.credential(gplusUser.idToken);
       const firebaseUser = await firebase.default.auth().signInWithCredential(googleCredential);
-      // console.log(JSON.stringify(firebaseUser.user));
+      console.log('----------------------------', JSON.stringify(firebaseUser.user));
       return firebaseUser.user;
 
     } catch (error) {
@@ -102,7 +103,7 @@ export class AuthenticationService {
       return credential.user;
     } catch (error) {
       console.error('Error: Login Google - Web' + JSON.stringify(error));
-      return error;
+      throw error;
     }
   }
 
@@ -172,21 +173,21 @@ export class AuthenticationService {
       const userUpdated: User = doc[0];
       console.log('ERERAREA:', JSON.stringify(userUpdated))
       data = {
-        uid: userUpdated.uid,
-        userType: userUpdated.userType || '',
-        email: userUpdated.email || null,
-        profilePhoto: userUpdated.profilePhoto || './assets/icon/user.png',
-        name: userUpdated.name || '',
-        lastname: userUpdated.lastname || '',
-        birthday: userUpdated.birthday || '',
-        phoneNumber: userUpdated.phoneNumber || '',
-        weight: userUpdated.weight || '',
-        height: userUpdated.height || '',
-        homeLatitude: userUpdated.homeLatitude || '',
-        homeLongitude: userUpdated.homeLongitude || '',
-        zoomIdMeeting: userUpdated.zoomIdMeeting || '',
-        zoomPasswordMeeting: userUpdated.zoomPasswordMeeting || '',
-        enabled: userUpdated.enabled,
+        uid: usertemp.uid,
+        userType: usertemp.userType || '',
+        email: usertemp.email || null,
+        profilePhoto: usertemp.profilePhoto || './assets/icon/user.png',
+        name: usertemp.name || '',
+        lastname: usertemp.lastname || '',
+        birthday: usertemp.birthday || '',
+        phoneNumber: usertemp.phoneNumber || '',
+        weight: usertemp.weight || '',
+        height: usertemp.height || '',
+        homeLatitude: usertemp.homeLatitude || '',
+        homeLongitude: usertemp.homeLongitude || '',
+        zoomIdMeeting: usertemp.zoomIdMeeting || '',
+        zoomPasswordMeeting: usertemp.zoomPasswordMeeting || '',
+        enabled: usertemp.enabled,
         provider,
         lastLogin: new Date(),
       };

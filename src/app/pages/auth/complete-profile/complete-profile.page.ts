@@ -77,6 +77,8 @@ export class CompleteProfilePage implements OnInit {
   }
 
   uploadFinishedEvt(data: any) {
+
+    this.showToast('Se terminó de subir la Foto', 'primary');
     this.profilePhotoURL = data.url;
     this.user.profilePhoto = this.profilePhotoURL;
   }
@@ -94,17 +96,14 @@ export class CompleteProfilePage implements OnInit {
   continueWithEmail() {
     this.authService.emailPasswordLogin(this.user.email, this.password).then( (log) => {
       this.authService.getCurrentUser().then( (user: User) => {
-        console.log('Login ' + user);
         this.user.uid = user.uid;
         this.user.enabled = true;
         this.user.tier = 0;
         this.authService.updateUserData(this.user, this.provider).then( (data) => {
-          if (user) {
-            if (user.userType === 'user') {
-              this.router.navigate(['subscription']);
-            } else if (user.userType === 'coach-tmp') {
-              this.router.navigate(['home']);
-            }
+          if (this.user.userType === 'user') {
+            this.router.navigate(['/subscription']);
+          } else if (this.user.userType === 'coach-tmp') {
+            this.router.navigate(['/home']);
           }
         }).catch( (reason) => {
           console.log(reason);
@@ -129,14 +128,18 @@ export class CompleteProfilePage implements OnInit {
   continueWithGoogle() {
 
     this.ufb.saveUser(this.user).then( () => {
+      this.showToast('Guardado', 'danger');
       this.authService.getCurrentUser().then( (user) => {
+        this.showToast(JSON.stringify(user), 'primary');
         if (user) {
-          if (user.userType === 'user') {
-            this.router.navigate(['subscription']);
-          } else if (user.userType === 'coach-tmp') {
-            this.router.navigate(['home']);
+          if (this.user.userType === 'user') {
+            this.router.navigate(['/subscription']);
+          } else if (this.user.userType === 'coach-tmp') {
+            this.router.navigate(['/home']);
           }
         }
+      }).catch( (reason) => {
+        this.showToast(JSON.stringify(reason), 'primary');
       })
       
     }).catch( (reason) => {
