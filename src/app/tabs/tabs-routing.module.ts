@@ -93,14 +93,14 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: '/auth/login',
+        redirectTo: '/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/auth/login',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
