@@ -32,6 +32,7 @@ export class ConectionService {
   }
 
   saveSession(session: Session){
+    console.log('PAAA');
     this.authService.getCurrentUser().then( (user: User) => {
       const refSession = this.afs.collection("sessions");
       if(session.id == null){

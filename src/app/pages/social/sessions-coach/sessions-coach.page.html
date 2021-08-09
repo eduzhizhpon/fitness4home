@@ -2,7 +2,7 @@
   <app-name-icon></app-name-icon>
   <ion-toolbar>
     <ion-title>
-      Sesiones
+      Nuevas Sesiones
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,22 +10,24 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Sesiones</ion-title>
+      <ion-title>Nuevas Sesiones</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngFor="let session of sessions">
-    <ion-item *ngIf="session.state == 'Pendiente'">
-      <ion-label>
-        <div *ngFor="let user of users">
-          <h3 *ngIf="session.uid == user.uid">{{user.name}}</h3>
-        </div>
-        <div *ngFor="let schedule of schedules">
-          <p *ngIf="schedule.sid == session.id">{{schedule.day}}, {{schedule.hour_start}} - {{schedule.hour_end}} {{schedule.type}}</p>
-        </div>
-      </ion-label>
-      <ion-button (click)="aceptSession(session)" slot="end">Aceptar</ion-button>
-    </ion-item>
+  <ion-list >
+    <div *ngFor="let session of sessions">
+      <ion-item  *ngIf="session.state == 'Pendiente'">
+        <ion-label>
+          <div *ngFor="let user of users">
+            <h3 *ngIf="session.uid == user.uid">{{user.name}}</h3>
+          </div>
+          <div *ngFor="let schedule of schedules">
+            <p *ngIf="schedule.sid == session.id">{{schedule.day}}, {{schedule.hour_start}} - {{schedule.hour_end}} {{schedule.type}}</p>
+          </div>
+        </ion-label>
+        <ion-button (click)="aceptSession(session)" slot="end">Aceptar</ion-button>
+      </ion-item>
+    </div>
   </ion-list>
 
 </ion-content>

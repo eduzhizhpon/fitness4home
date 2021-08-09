@@ -49,7 +49,10 @@ export class LoginPage implements OnInit {
       this.authService.getCurrentUser().then( (user: User) => {
         if (user) {
           if (user.enabled) {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home'])
+              .then(() => {
+                window.location.reload();
+              });
           } else if (!user.enabled) {
             this.authService.logout().then( () => {
             this.router.navigate(['/auth/login']);

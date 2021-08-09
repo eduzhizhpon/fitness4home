@@ -25,9 +25,15 @@ export class HomePage implements OnInit {
     private tierManageService: TierManageService,
     public loadingController: LoadingController) {
     
+    
+  }
+
+  ngOnInit() {
     this.loaded = false;
     this.authService.getCurrentUser().then( (user: any) => {
       if (user && user?.enabled) {
+
+        console.log(user.userType);
         switch (user.userType) {
           case 'admin':
             this.isAdmin = true;
@@ -61,9 +67,6 @@ export class HomePage implements OnInit {
       }
       this.loaded = true;
     }); 
-  }
-
-  ngOnInit() {
   }
 
   logout(): void{

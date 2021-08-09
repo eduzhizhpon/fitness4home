@@ -77,8 +77,6 @@ export class CompleteProfilePage implements OnInit {
   }
 
   uploadFinishedEvt(data: any) {
-
-    this.showToast('Se terminó de subir la Foto', 'primary');
     this.profilePhotoURL = data.url;
     this.user.profilePhoto = this.profilePhotoURL;
   }
@@ -128,9 +126,7 @@ export class CompleteProfilePage implements OnInit {
   continueWithGoogle() {
 
     this.ufb.saveUser(this.user).then( () => {
-      this.showToast('Guardado', 'danger');
       this.authService.getCurrentUser().then( (user) => {
-        this.showToast(JSON.stringify(user), 'primary');
         if (user) {
           if (this.user.userType === 'user') {
             this.router.navigate(['/subscription']);
@@ -148,22 +144,6 @@ export class CompleteProfilePage implements OnInit {
       const colorCode = 'danger';
       this.showToast(msg, colorCode, 3500);
     });
-    
-    // this.authService.getCurrentUser().then( (user: User) => {
-    //   console.log('ASDASDASDASD:', user);
-    //   this.user.email = user.email;
-    //   this.user.uid = user.uid;
-    //   this.user.enabled = true;
-    //   this.authService.updateUserData(this.user, this.provider).then( (data) => {
-        
-    //   })
-
-    // }).catch( (reason) => {
-    //   console.log(reason);
-    //   const msg = 'Ha ocurrido un error al completar el perfil con Google';
-    //   const colorCode = 'danger';
-    //   this.showToast(msg, colorCode, 3500);
-    // });
   }
 
   showToast(msg: string, colorCode: string, durationMsg: number = 2000) {

@@ -54,7 +54,9 @@ export class SubscriptionPage implements OnInit {
 
   onRouterHome(): void {
     console.log('Ir al Home');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
   }
 
   showToast(msg: string, colorCode: string, durationMsg: number = 2000) {

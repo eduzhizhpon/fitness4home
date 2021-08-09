@@ -16,7 +16,7 @@
     <h2>Reunión online</h2>
     <ion-card>
       <h3>Sesión por zoom con {{user.name}}</h3>
-      <app-zoom-meeting meetingType="coach" meetingNumber="login.zoomIdMeeting" meetingPassword="login.zoomPasswordMeeting" displayName="login.name"></app-zoom-meeting>
+      <app-zoom-meeting meetingType="coach" [meetingNumber]="login.zoomIdMeeting" [meetingPassword]="login.zoomPasswordMeeting" [displayName]="login.name"></app-zoom-meeting>
     </ion-card>
   </div>
   <ion-title>Horarios</ion-title>

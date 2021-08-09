@@ -67,7 +67,7 @@
       <p>Hora de inicio: {{schedule.hour_start}}</p>
       <p>Hora de Finalización: {{schedule.hour_end}}</p>
       <div *ngIf="session.state == 'Aceptado'">
-        <app-zoom-meeting meetingType="user" meetingNumber="coach.zoomIdMeeting" meetingPassword="coach.zoomPasswordMeeting" displayName="login.name"></app-zoom-meeting>
+        <app-zoom-meeting meetingType="user" [meetingNumber]="coach.zoomIdMeeting" [meetingPassword]="coach.zoomPasswordMeeting" [displayName]="login.name"></app-zoom-meeting>
       </div>
     </ion-card>
   </div>

@@ -48,6 +48,21 @@
         <ion-row>
           <ion-col>
             <ion-item>
+              <ion-label position="stacked">Id Zoom meeting</ion-label>
+              <ion-input [(ngModel)]="currentUser.zoomIdMeeting" type="text" inputmode="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">Contraseña del Zoom Meeting</ion-label>
+              <ion-input [(ngModel)]="currentUser.zoomPasswordMeeting" type="password" inputmode="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item>
               <ion-label>Actualiza tu peso (kg)</ion-label>
               <ion-input [(ngModel)]="currentUser.weight" type="number" inputmode="decimal" min="0"></ion-input>
             </ion-item>
